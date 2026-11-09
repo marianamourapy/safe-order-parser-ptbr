@@ -6,29 +6,29 @@ from order_parser.session import PerfilSessao
 
 def test_alergia_dita_antes_vale_no_pedido_seguinte():
     s = PerfilSessao()
-    s.atualizar(Pedido(excluir_ingredientes=["leite"], restricoes=["sem_amendoim"], alerta_saude=True))
-    efetivo = s.atualizar(Pedido(categorias=["doce"]))
-    assert efetivo.categorias == ["doce"]
-    assert efetivo.excluir_ingredientes == ["leite"]
-    assert efetivo.restricoes == ["sem_amendoim"]
-    assert efetivo.alerta_saude is True
+    s.atualizar(Pedido(exclude_ingredients=["leite"], restrictions=["sem_amendoim"], health_alert=True))
+    efetivo = s.atualizar(Pedido(categories=["doce"]))
+    assert efetivo.categories == ["doce"]
+    assert efetivo.exclude_ingredients == ["leite"]
+    assert efetivo.restrictions == ["sem_amendoim"]
+    assert efetivo.health_alert is True
 
 
 def test_duas_restricoes_na_mesma_mensagem_valem_juntas():
     s = PerfilSessao()
-    s.atualizar(Pedido(restricoes=["sem_gluten", "vegetariano"], alerta_saude=True))
-    assert s.atualizar(Pedido(categorias=["pizza"])).restricoes == ["sem_gluten", "vegetariano"]
-    assert s.atualizar(Pedido(categorias=["lanche"])).restricoes == ["sem_gluten", "vegetariano"]
+    s.atualizar(Pedido(restrictions=["sem_gluten", "vegetariano"], health_alert=True))
+    assert s.atualizar(Pedido(categories=["pizza"])).restrictions == ["sem_gluten", "vegetariano"]
+    assert s.atualizar(Pedido(categories=["lanche"])).restrictions == ["sem_gluten", "vegetariano"]
 
 
 def test_sem_cebola_nao_passa_para_o_proximo_pedido():
     s = PerfilSessao()
-    s.atualizar(Pedido(categorias=["pizza"], excluir_ingredientes=["cebola"]))
-    assert s.atualizar(Pedido(categorias=["hamburguer"])).excluir_ingredientes == []
+    s.atualizar(Pedido(categories=["pizza"], exclude_ingredients=["cebola"]))
+    assert s.atualizar(Pedido(categories=["hamburguer"])).exclude_ingredients == []
 
 
 def test_mensagem_de_emergencia_nao_altera_perfil():
     s = PerfilSessao()
-    s.atualizar(Pedido(restricoes=["vegano"]))
-    assert s.atualizar(Pedido(intencao="emergencia")).intencao == "emergencia"
-    assert s.restricoes == {"vegano"}
+    s.atualizar(Pedido(restrictions=["vegano"]))
+    assert s.atualizar(Pedido(intent="emergencia")).intent == "emergencia"
+    assert s.restrictions == {"vegano"}

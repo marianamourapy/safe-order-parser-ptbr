@@ -254,8 +254,8 @@ def transcricao(rng, s):
 # ---------------------------------------------------------------- amostragem do rótulo + texto
 def gerar_pedido(rng):
     """Sorteia um Pedido e escreve um texto que o expressa. Devolve (texto, Pedido)."""
-    d = {"categorias": [], "excluir_categorias": [], "excluir_ingredientes": [], "restricoes": [],
-         "restricoes_parciais": [], "desejos": []}
+    d = {"categories": [], "exclude_categories": [], "exclude_ingredients": [], "restrictions": [],
+         "partial_restrictions": [], "wishes": []}
     partes = []
     tipo = rng.choices(["simples", "multi", "negacao", "grupo", "restricao", "saude", "vago", "mudanca", "vazio",
                         "conflito"],
@@ -264,12 +264,12 @@ def gerar_pedido(rng):
 
     def add_cat(k=1):
         escolhidas = rng.sample(cats, k)
-        d["categorias"] = escolhidas
+        d["categories"] = escolhidas
         partes.append(rng.choice(VERBOS).format(x=r_cats(rng, escolhidas)))
 
     def add_desejo(k=1):
         ds = rng.sample(list(DESEJO), k)
-        d["desejos"] += ds
+        d["wishes"] += ds
         partes.extend(rng.choice(DESEJO[x]) for x in ds)
 
     if tipo == "vazio":  # pedido sem nada representável
@@ -284,10 +284,10 @@ def gerar_pedido(rng):
         # (categoria + restrição) e o sistema, ao filtrar, percebe o conflito e pergunta.
         r = rng.choice(list(CONFLITO))
         c = rng.choice(sorted(CONFLITO[r]))
-        d["categorias"], d["restricoes"] = [c], [r]
+        d["categories"], d["restrictions"] = [c], [r]
         x = rng.choice(CAT[c])
         if r == "sem_frutos_do_mar":
-            d["alerta_saude"] = True
+            d["health_alert"] = True
             partes.append(rng.choice(["tenho alergia a camarão, mas tô com vontade de {x}",
                                       "sou alérgica a frutos do mar, mas me vê {x} mesmo assim",
                                       "não posso comer frutos do mar de jeito nenhum, mas queria {x}"]).format(x=x))
@@ -298,7 +298,7 @@ def gerar_pedido(rng):
 
     if tipo == "mudanca":
         a, b = rng.sample(cats, 2)
-        d["categorias"] = [b]
+        d["categories"] = [b]
         modelo = rng.choice(["{a}, não, pensando bem, {b}", "ia pedir {a} mas mudei de ideia, {b}",
                              "{a}... aliás, prefiro {b}", "quero {a}, pera, {b} mesmo", "esquece {a}, manda {b}"])
         partes.append(modelo.format(a=rng.choice(CAT[a]), b=rng.choice(CAT[b])))
@@ -316,33 +316,33 @@ def gerar_pedido(rng):
         campos = rng.sample(["preco", "frete", "tempo", "nota", "desejo", "xing"], rng.choice([2, 2, 3, 3, 4]))
         for c in campos:
             if c == "preco":
-                d["preco_max"] = rng.choice([rng.randrange(10, 150, 5), rng.randrange(15, 80), 39.9, 29.9, 49.9])
-                partes.append(r_preco(rng, d["preco_max"]))
+                d["max_price"] = rng.choice([rng.randrange(10, 150, 5), rng.randrange(15, 80), 39.9, 29.9, 49.9])
+                partes.append(r_preco(rng, d["max_price"]))
             elif c == "frete":
-                d["frete_gratis"] = True
+                d["free_delivery"] = True
                 partes.append(rng.choice(FRETE))
             elif c == "tempo":
-                d["tempo_max_min"] = rng.choice([15, 20, 25, 30, 30, 35, 40, 45, 50, 60, 60, 90])
-                partes.append(r_tempo(rng, d["tempo_max_min"]))
+                d["max_delivery_min"] = rng.choice([15, 20, 25, 30, 30, 35, 40, 45, 50, 60, 60, 90])
+                partes.append(r_tempo(rng, d["max_delivery_min"]))
             elif c == "nota":
-                d["nota_min"] = rng.choice([4.0, 4.2, 4.3, 4.4, 4.5, 4.5, 4.6, 4.7, 4.8, 4.9])
-                partes.append(r_nota(rng, d["nota_min"]))
+                d["min_rating"] = rng.choice([4.0, 4.2, 4.3, 4.4, 4.5, 4.5, 4.6, 4.7, 4.8, 4.9])
+                partes.append(r_nota(rng, d["min_rating"]))
             elif c == "desejo":
-                opcoes = [x for x in DESEJO if not (x == "barato" and "preco_max" in d)
-                          and not (x == "rapido" and "tempo_max_min" in d)
-                          and not (x == "bem_avaliado" and "nota_min" in d)]
+                opcoes = [x for x in DESEJO if not (x == "barato" and "max_price" in d)
+                          and not (x == "rapido" and "max_delivery_min" in d)
+                          and not (x == "bem_avaliado" and "min_rating" in d)]
                 x = rng.choice(opcoes)
-                d["desejos"].append(x)
+                d["wishes"].append(x)
                 partes.append(rng.choice(DESEJO[x]))
             elif c == "xing":
                 ing = rng.sample(INGREDIENTES, rng.choice([1, 1, 2]))
-                d["excluir_ingredientes"] += ing
+                d["exclude_ingredients"] += ing
                 partes.append(" e ".join(f"sem {i}" for i in ing))
 
     if tipo == "negacao":
         if rng.random() < 0.5:
-            xs = rng.sample([c for c in cats if c not in d["categorias"]], rng.choice([1, 1, 2]))
-            d["excluir_categorias"] = xs
+            xs = rng.sample([c for c in cats if c not in d["categories"]], rng.choice([1, 1, 2]))
+            d["exclude_categories"] = xs
             nomes = " nem ".join(rng.choice(CAT_GEN[x]) for x in xs)
             partes.append(rng.choice(["nada de {n}", "qualquer coisa menos {n}", "não quero {n}", "hoje {n} não",
                                       "tudo menos {n}", "exceto {n}", "sem {n} hoje"]).format(n=nomes))
@@ -351,38 +351,38 @@ def gerar_pedido(rng):
         else:
             add_cat()
             ing = rng.sample(INGREDIENTES, rng.choice([1, 1, 2]))
-            d["excluir_ingredientes"] = ing
+            d["exclude_ingredients"] = ing
             forma = rng.choice(["sem {i}", "tira o {i}", "não coloca {i}", "pode tirar {i}", "{i} não"])
             partes.append(" e ".join(forma.format(i=i) for i in ing))
         if rng.random() < 0.15:
-            d["excluir_ingredientes"].append("fritura")
+            d["exclude_ingredients"].append("fritura")
             partes.append(rng.choice(["nada frito", "sem fritura"]))
 
     if tipo == "grupo":
         n = rng.choice([2, 3, 3, 4, 4, 5, 6, 8, 10])
-        d["pessoas"] = n
+        d["people"] = n
         partes.append(r_pessoas(rng, n))
         r = rng.random()
         if r < 0.45:
             x = rng.choice(list(PARC_PRED))
-            d["restricoes_parciais"] = [x]
+            d["partial_restrictions"] = [x]
             partes.append(f"{rng.choice(PARC_SUJ)} {rng.choice(PARC_PRED[x])}")
         elif r < 0.6:
             x = rng.choice(["vegetariano", "vegano", "sem_gluten", "sem_lactose"])
-            d["restricoes"] = [x]
+            d["restrictions"] = [x]
             partes.append(rng.choice(["todo mundo {r}", "todos {r}", "tudo {r}"]).format(r=rng.choice(REST[x])))
         elif r < 0.7:
             frase, x = rng.choice(SAUDE_OUTRO)
-            d["restricoes_parciais"] = [x]
-            d["alerta_saude"] = True
+            d["partial_restrictions"] = [x]
+            d["health_alert"] = True
             partes.append(frase)
         if rng.random() < 0.4:
-            d["preco_max"] = rng.randrange(40, 250, 10)
-            partes.append(r_preco(rng, d["preco_max"]))
+            d["max_price"] = rng.randrange(40, 250, 10)
+            partes.append(r_preco(rng, d["max_price"]))
 
     if tipo == "restricao":
         xs = rng.sample(list(REST), rng.choice([1, 1, 2]))
-        d["restricoes"] = xs
+        d["restrictions"] = xs
         for x in xs:
             if x in REST_PESSOA and rng.random() < 0.4:
                 partes.insert(0, rng.choice(REST_PESSOA[x]))
@@ -393,16 +393,16 @@ def gerar_pedido(rng):
 
     if tipo == "saude":
         frase, rest, ing = rng.choice(SAUDE)
-        d["alerta_saude"] = True
+        d["health_alert"] = True
         if rest:
-            d["restricoes"].append(rest)
+            d["restrictions"].append(rest)
         if ing:
-            d["excluir_ingredientes"].append(ing)
+            d["exclude_ingredients"].append(ing)
         # Saúde + escolha na mesma frase ("sou celíaca e vegetariana"): foi aqui que o Ailo
         # considerou só uma das restrições (audit/FINDINGS.md).
         if rng.random() < 0.35:
             extra = rng.choice([x for x in EXTRA_REST if x != rest])
-            d["restricoes"].append(extra)
+            d["restrictions"].append(extra)
             frase += rng.choice(EXTRA_REST[extra])
         partes.insert(rng.choice([0, len(partes)]), frase)
 
@@ -423,7 +423,7 @@ CONFLITO = {
 
 
 def conflita(d):
-    return any(set(d["categorias"]) & CONFLITO.get(r, set()) for r in d["restricoes"])
+    return any(set(d["categories"]) & CONFLITO.get(r, set()) for r in d["restrictions"])
 
 
 FORA = ["cadê meu pedido?", "meu pedido tá atrasado", "quero cancelar", "como cancelo a compra?",
@@ -480,7 +480,7 @@ def gerar_outro(rng):
         if rng.random() < 0.2:  # injeção dentro de um pedido: continua ataque
             texto = f"quero {rng.choice(CAT[rng.choice(list(CAT))])}. " + texto
     texto = ruido(rng, rng.choice(ABERTURAS[:6]) + texto)
-    return " ".join(texto.split()), Pedido(intencao=tipo)
+    return " ".join(texto.split()), Pedido(intent=tipo)
 
 
 # ---------------------------------------------------------------- vazamento

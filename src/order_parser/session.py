@@ -18,25 +18,25 @@ from order_parser.schema import Intencao, Pedido
 
 @dataclass
 class PerfilSessao:
-    restricoes: set[str] = field(default_factory=set)
-    excluir_ingredientes: set[str] = field(default_factory=set)
-    alerta_saude: bool = False
+    restrictions: set[str] = field(default_factory=set)
+    exclude_ingredients: set[str] = field(default_factory=set)
+    health_alert: bool = False
 
     def atualizar(self, p: Pedido) -> Pedido:
         """Registra o que deve persistir e devolve o pedido efetivo desta mensagem."""
-        if p.intencao != Intencao.pedido.value:
+        if p.intent != Intencao.pedido.value:
             return p
-        self.restricoes |= set(p.restricoes)
-        if p.alerta_saude:
-            self.alerta_saude = True
-            self.excluir_ingredientes |= set(p.excluir_ingredientes)
+        self.restrictions |= set(p.restrictions)
+        if p.health_alert:
+            self.health_alert = True
+            self.exclude_ingredients |= set(p.exclude_ingredients)
         d = p.model_dump()
-        d["restricoes"] = sorted(self.restricoes | set(p.restricoes))
-        d["excluir_ingredientes"] = sorted(self.excluir_ingredientes | set(p.excluir_ingredientes))
-        d["alerta_saude"] = self.alerta_saude or p.alerta_saude
+        d["restrictions"] = sorted(self.restrictions | set(p.restrictions))
+        d["exclude_ingredients"] = sorted(self.exclude_ingredients | set(p.exclude_ingredients))
+        d["health_alert"] = self.health_alert or p.health_alert
         return Pedido.model_validate(d)
 
     def limpar(self) -> None:
-        self.restricoes.clear()
-        self.excluir_ingredientes.clear()
-        self.alerta_saude = False
+        self.restrictions.clear()
+        self.exclude_ingredients.clear()
+        self.health_alert = False

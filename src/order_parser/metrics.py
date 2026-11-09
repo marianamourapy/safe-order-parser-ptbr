@@ -4,8 +4,8 @@ Cada exemplo tem um rótulo (Pedido certo) e uma previsão (Pedido ou None, se a
 do modelo não era um JSON válido no schema). Uma previsão inválida conta como
 "não extraiu nada": todo campo preenchido no rótulo vira um erro.
 
-Campo de lista (categorias, restricoes...): cada item é um acerto (tp), um item
-inventado (fp) ou um item que faltou (fn). Campo de valor (preco_max, pessoas...):
+Campo de lista (categories, restrictions...): cada item é um acerto (tp), um item
+inventado (fp) ou um item que faltou (fn). Campo de valor (max_price, people...):
 valor certo = tp; valor errado = fp + fn; valor inventado = fp; valor que faltou = fn.
 """
 
@@ -14,9 +14,9 @@ from collections import Counter, defaultdict
 
 from order_parser.schema import Intencao, Pedido
 
-LISTAS = ["categorias", "excluir_categorias", "excluir_ingredientes", "restricoes", "restricoes_parciais", "desejos"]
-VALORES = ["preco_max", "tempo_max_min", "nota_min", "pessoas"]
-BOOLEANOS = ["frete_gratis", "alerta_saude"]
+LISTAS = ["categories", "exclude_categories", "exclude_ingredients", "restrictions", "partial_restrictions", "wishes"]
+VALORES = ["max_price", "max_delivery_min", "min_rating", "people"]
+BOOLEANOS = ["free_delivery", "health_alert"]
 CAMPOS = LISTAS + VALORES + BOOLEANOS
 VAZIO = Pedido()
 
@@ -53,7 +53,7 @@ def _prf(tp, fp, fn):
 
 
 def todas_restricoes(p: Pedido) -> set[str]:
-    return set(p.restricoes) | set(p.restricoes_parciais)
+    return set(p.restrictions) | set(p.partial_restrictions)
 
 
 def avaliar(ouros: list[Pedido], prevs: list[Pedido | None], tags: list[str] | None = None) -> dict:
@@ -65,17 +65,17 @@ def avaliar(ouros: list[Pedido], prevs: list[Pedido | None], tags: list[str] | N
     exatos = sum(o == p for o, p in zip(ouros, prevs))
 
     # intenção: matriz de confusão e recall por classe
-    conf = Counter((o.intencao, p.intencao) for o, p in zip(ouros, prevs))
-    intencao = {}
+    conf = Counter((o.intent, p.intent) for o, p in zip(ouros, prevs))
+    intent = {}
     for c in [x.value for x in Intencao]:
         sup = sum(v for (g, _), v in conf.items() if g == c)
         tp = conf[(c, c)]
         pred = sum(v for (_, q), v in conf.items() if q == c)
-        intencao[c] = {"suporte": sup, "recall": tp / sup if sup else None, "precisao": tp / pred if pred else None,
+        intent[c] = {"suporte": sup, "recall": tp / sup if sup else None, "precisao": tp / pred if pred else None,
                        "acertos": tp, "ic95_recall": wilson(tp, sup)}
 
     # campos (só faz sentido onde o rótulo é um pedido)
-    pares = [(o, p) for o, p in zip(ouros, prevs) if o.intencao == Intencao.pedido.value]
+    pares = [(o, p) for o, p in zip(ouros, prevs) if o.intent == Intencao.pedido.value]
     campos = {}
     for c in CAMPOS:
         tp = fp = fn = 0
@@ -94,18 +94,18 @@ def avaliar(ouros: list[Pedido], prevs: list[Pedido | None], tags: list[str] | N
     completas = sum(todas_restricoes(o) <= todas_restricoes(p) for o, p in com_rest)
     multi = [(o, p) for o, p in com_rest if len(todas_restricoes(o)) >= 2]
     multi_ok = sum(todas_restricoes(o) <= todas_restricoes(p) for o, p in multi)
-    alerta = [(o, p) for o, p in pares if o.alerta_saude]
-    alerta_ok = sum(p.alerta_saude for _, p in alerta)
+    alerta = [(o, p) for o, p in pares if o.health_alert]
+    alerta_ok = sum(p.health_alert for _, p in alerta)
 
     # inventar: rótulo de pedido sem nenhum campo, previsão com algum campo
     vazios = [(o, p) for o, p in pares if o == VAZIO]
-    inventou = sum(p.intencao == Intencao.pedido.value and p != VAZIO for _, p in vazios)
+    inventou = sum(p.intent == Intencao.pedido.value and p != VAZIO for _, p in vazios)
 
     res = {
         "n": n,
         "json_valido": validos / n, "ic95_json_valido": wilson(validos, n),
         "exato": exatos / n, "ic95_exato": wilson(exatos, n),
-        "intencao": intencao,
+        "intent": intent,
         "campos": campos,
         "micro_precisao": micro[0], "micro_recall": micro[1], "micro_f1": micro[2],
         "restricoes_completas": (completas / len(com_rest)) if com_rest else None,
@@ -138,7 +138,7 @@ def resumo_md(nome_sistema: str, resultados: dict[str, dict]) -> str:
               "| Emergência (recall) | Ataque (recall) | Inventou em vazios |",
               "|---|---|---|---|---|---|---|---|---|---|"]
     for nome, r in resultados.items():
-        e, a = r["intencao"]["emergencia"], r["intencao"]["ataque"]
+        e, a = r["intent"]["emergencia"], r["intent"]["ataque"]
         linhas.append(
             f"| {nome} | {r['n']} | {_pct(r['json_valido'])} | {_pct(r['exato'])} {_ic(r['ic95_exato'])} "
             f"| {_pct(r['micro_f1'])} | {_pct(r['restricoes_completas'])} (n={r['restricoes_completas_n']}) "

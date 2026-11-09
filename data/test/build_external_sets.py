@@ -16,10 +16,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 from order_parser.schema import Pedido  # noqa: E402
 
 CAMPOS = {
-    "cat": "categorias", "xcat": "excluir_categorias", "xing": "excluir_ingredientes",
-    "rest": "restricoes", "parc": "restricoes_parciais", "saude": "alerta_saude",
-    "preco": "preco_max", "frete": "frete_gratis", "tempo": "tempo_max_min",
-    "nota": "nota_min", "pessoas": "pessoas", "des": "desejos", "tipo": "intencao",
+    "cat": "categories", "xcat": "exclude_categories", "xing": "exclude_ingredients",
+    "rest": "restrictions", "parc": "partial_restrictions", "saude": "health_alert",
+    "preco": "max_price", "frete": "free_delivery", "tempo": "max_delivery_min",
+    "nota": "min_rating", "pessoas": "people", "des": "wishes", "tipo": "intent",
 }
 
 

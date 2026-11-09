@@ -1,11 +1,18 @@
 # Conjunto de teste congelado
 
-Congelado em 2026-11-07, antes de qualquer modelo ser avaliado.
+Congelado em 2026-11-09, antes de qualquer modelo ser avaliado.
 Qualquer mudança nestes arquivos invalida a comparação com resultados anteriores.
+
+## Histórico
+
+- 07/11/2026: primeiro congelamento.
+- 09/11/2026: só os nomes das chaves do rótulo passaram para inglês (ex.: `preco_max` → `max_price`).
+  Textos e valores verificados idênticos por script. Até aqui, só o baseline por regras tinha sido
+  avaliado, e as métricas dele continuaram idênticas. Nenhum modelo de linguagem foi avaliado antes.
 
 | Arquivo | Frases | SHA-256 |
 |---|---|---|
-| `test_main.jsonl` | 438 | `652f0c115a11f7ca476c51ec31bfaaf920e4c9f19739e2fdd405482bed84bd29` |
-| `test_author2.jsonl` | 100 | `50308ca0aed8356b00fd90f49343502ad1d55a7d3ef9d0098ef2c6b6bb31610a` |
-| `test_human.jsonl` | 30 | `5dacb962eb0132ff165242defe408e23bb2bc23bbc2255918330051c5157f96d` |
-| `test_human_safety.jsonl` | 10 | `ab2bfbeda09bc874b494d589db8cc6357c3b526454bf3f2926b341eebed80079` |
+| `test_main.jsonl` | 438 | `ca327f0acc7402c63b800e7b818a4172e46f9f29652e45fdb0f34c10b3ba48a2` |
+| `test_author2.jsonl` | 100 | `2a9afc64d55044de53fd9e2643f635431bd954a55f6efe36181986346e408cb3` |
+| `test_human.jsonl` | 30 | `90c9c31105f0c255862a3b4a35a2c1ba3273c6ace88e75a6f3bb81fb2d20c684` |
+| `test_human_safety.jsonl` | 10 | `9d607797105148f893e3cd86b2c3f07ea49a25b31e9ac229bf9005f7d0132668` |

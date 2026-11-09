@@ -11,7 +11,7 @@
    0.6189006145496414,
    0.707008036876571
   ],
-  "intencao": {
+  "intent": {
    "pedido": {
     "suporte": 367,
     "recall": 0.997275204359673,
@@ -54,7 +54,7 @@
    }
   },
   "campos": {
-   "categorias": {
+   "categories": {
     "tp": 258,
     "fp": 30,
     "fn": 25,
@@ -62,7 +62,7 @@
     "recall": 0.911660777385159,
     "f1": 0.9036777583187391
    },
-   "excluir_categorias": {
+   "exclude_categories": {
     "tp": 28,
     "fp": 3,
     "fn": 7,
@@ -70,7 +70,7 @@
     "recall": 0.8,
     "f1": 0.8484848484848486
    },
-   "excluir_ingredientes": {
+   "exclude_ingredients": {
     "tp": 31,
     "fp": 9,
     "fn": 11,
@@ -78,7 +78,7 @@
     "recall": 0.7380952380952381,
     "f1": 0.7560975609756099
    },
-   "restricoes": {
+   "restrictions": {
     "tp": 50,
     "fp": 11,
     "fn": 5,
@@ -86,7 +86,7 @@
     "recall": 0.9090909090909091,
     "f1": 0.8620689655172413
    },
-   "restricoes_parciais": {
+   "partial_restrictions": {
     "tp": 20,
     "fp": 2,
     "fn": 9,
@@ -94,7 +94,7 @@
     "recall": 0.6896551724137931,
     "f1": 0.7843137254901961
    },
-   "desejos": {
+   "wishes": {
     "tp": 82,
     "fp": 3,
     "fn": 14,
@@ -102,7 +102,7 @@
     "recall": 0.8541666666666666,
     "f1": 0.9060773480662984
    },
-   "preco_max": {
+   "max_price": {
     "tp": 53,
     "fp": 12,
     "fn": 5,
@@ -110,7 +110,7 @@
     "recall": 0.9137931034482759,
     "f1": 0.8617886178861788
    },
-   "tempo_max_min": {
+   "max_delivery_min": {
     "tp": 30,
     "fp": 1,
     "fn": 1,
@@ -118,7 +118,7 @@
     "recall": 0.967741935483871,
     "f1": 0.967741935483871
    },
-   "nota_min": {
+   "min_rating": {
     "tp": 27,
     "fp": 0,
     "fn": 2,
@@ -126,7 +126,7 @@
     "recall": 0.9310344827586207,
     "f1": 0.9642857142857143
    },
-   "pessoas": {
+   "people": {
     "tp": 44,
     "fp": 1,
     "fn": 8,
@@ -134,7 +134,7 @@
     "recall": 0.8461538461538461,
     "f1": 0.9072164948453608
    },
-   "frete_gratis": {
+   "free_delivery": {
     "tp": 33,
     "fp": 0,
     "fn": 1,
@@ -142,7 +142,7 @@
     "recall": 0.9705882352941176,
     "f1": 0.9850746268656716
    },
-   "alerta_saude": {
+   "health_alert": {
     "tp": 29,
     "fp": 0,
     "fn": 0,
@@ -253,7 +253,7 @@
    0.4231640509017654,
    0.6153561567991945
   ],
-  "intencao": {
+  "intent": {
    "pedido": {
     "suporte": 92,
     "recall": 0.9891304347826086,
@@ -296,7 +296,7 @@
    }
   },
   "campos": {
-   "categorias": {
+   "categories": {
     "tp": 44,
     "fp": 17,
     "fn": 12,
@@ -304,7 +304,7 @@
     "recall": 0.7857142857142857,
     "f1": 0.7521367521367521
    },
-   "excluir_categorias": {
+   "exclude_categories": {
     "tp": 2,
     "fp": 2,
     "fn": 4,
@@ -312,7 +312,7 @@
     "recall": 0.3333333333333333,
     "f1": 0.4
    },
-   "excluir_ingredientes": {
+   "exclude_ingredients": {
     "tp": 16,
     "fp": 17,
     "fn": 8,
@@ -320,7 +320,7 @@
     "recall": 0.6666666666666666,
     "f1": 0.5614035087719298
    },
-   "restricoes": {
+   "restrictions": {
     "tp": 9,
     "fp": 2,
     "fn": 0,
@@ -328,7 +328,7 @@
     "recall": 1.0,
     "f1": 0.9
    },
-   "restricoes_parciais": {
+   "partial_restrictions": {
     "tp": 0,
     "fp": 0,
     "fn": 1,
@@ -336,7 +336,7 @@
     "recall": 0.0,
     "f1": null
    },
-   "desejos": {
+   "wishes": {
     "tp": 12,
     "fp": 3,
     "fn": 4,
@@ -344,7 +344,7 @@
     "recall": 0.75,
     "f1": 0.7741935483870969
    },
-   "preco_max": {
+   "max_price": {
     "tp": 10,
     "fp": 1,
     "fn": 0,
@@ -352,7 +352,7 @@
     "recall": 1.0,
     "f1": 0.9523809523809523
    },
-   "tempo_max_min": {
+   "max_delivery_min": {
     "tp": 2,
     "fp": 0,
     "fn": 0,
@@ -360,7 +360,7 @@
     "recall": 1.0,
     "f1": 1.0
    },
-   "nota_min": {
+   "min_rating": {
     "tp": 1,
     "fp": 0,
     "fn": 0,
@@ -368,7 +368,7 @@
     "recall": 1.0,
     "f1": 1.0
    },
-   "pessoas": {
+   "people": {
     "tp": 5,
     "fp": 3,
     "fn": 7,
@@ -376,7 +376,7 @@
     "recall": 0.4166666666666667,
     "f1": 0.5
    },
-   "frete_gratis": {
+   "free_delivery": {
     "tp": 2,
     "fp": 0,
     "fn": 0,
@@ -384,7 +384,7 @@
     "recall": 1.0,
     "f1": 1.0
    },
-   "alerta_saude": {
+   "health_alert": {
     "tp": 5,
     "fp": 1,
     "fn": 0,
@@ -427,7 +427,7 @@
    0.33153851227173764,
    0.6684614877282624
   ],
-  "intencao": {
+  "intent": {
    "pedido": {
     "suporte": 28,
     "recall": 1.0,
@@ -470,7 +470,7 @@
    }
   },
   "campos": {
-   "categorias": {
+   "categories": {
     "tp": 10,
     "fp": 3,
     "fn": 9,
@@ -478,7 +478,7 @@
     "recall": 0.5263157894736842,
     "f1": 0.625
    },
-   "excluir_categorias": {
+   "exclude_categories": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -486,7 +486,7 @@
     "recall": null,
     "f1": null
    },
-   "excluir_ingredientes": {
+   "exclude_ingredients": {
     "tp": 0,
     "fp": 0,
     "fn": 1,
@@ -494,7 +494,7 @@
     "recall": 0.0,
     "f1": null
    },
-   "restricoes": {
+   "restrictions": {
     "tp": 2,
     "fp": 1,
     "fn": 1,
@@ -502,7 +502,7 @@
     "recall": 0.6666666666666666,
     "f1": 0.6666666666666666
    },
-   "restricoes_parciais": {
+   "partial_restrictions": {
     "tp": 0,
     "fp": 0,
     "fn": 2,
@@ -510,7 +510,7 @@
     "recall": 0.0,
     "f1": null
    },
-   "desejos": {
+   "wishes": {
     "tp": 12,
     "fp": 2,
     "fn": 2,
@@ -518,7 +518,7 @@
     "recall": 0.8571428571428571,
     "f1": 0.8571428571428571
    },
-   "preco_max": {
+   "max_price": {
     "tp": 1,
     "fp": 0,
     "fn": 0,
@@ -526,7 +526,7 @@
     "recall": 1.0,
     "f1": 1.0
    },
-   "tempo_max_min": {
+   "max_delivery_min": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -534,7 +534,7 @@
     "recall": null,
     "f1": null
    },
-   "nota_min": {
+   "min_rating": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -542,7 +542,7 @@
     "recall": null,
     "f1": null
    },
-   "pessoas": {
+   "people": {
     "tp": 2,
     "fp": 2,
     "fn": 2,
@@ -550,7 +550,7 @@
     "recall": 0.5,
     "f1": 0.5
    },
-   "frete_gratis": {
+   "free_delivery": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -558,7 +558,7 @@
     "recall": null,
     "f1": null
    },
-   "alerta_saude": {
+   "health_alert": {
     "tp": 3,
     "fp": 0,
     "fn": 1,
@@ -601,7 +601,7 @@
    0.39677321997956516,
    0.892210712513788
   ],
-  "intencao": {
+  "intent": {
    "pedido": {
     "suporte": 0,
     "recall": null,
@@ -644,7 +644,7 @@
    }
   },
   "campos": {
-   "categorias": {
+   "categories": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -652,7 +652,7 @@
     "recall": null,
     "f1": null
    },
-   "excluir_categorias": {
+   "exclude_categories": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -660,7 +660,7 @@
     "recall": null,
     "f1": null
    },
-   "excluir_ingredientes": {
+   "exclude_ingredients": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -668,7 +668,7 @@
     "recall": null,
     "f1": null
    },
-   "restricoes": {
+   "restrictions": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -676,7 +676,7 @@
     "recall": null,
     "f1": null
    },
-   "restricoes_parciais": {
+   "partial_restrictions": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -684,7 +684,7 @@
     "recall": null,
     "f1": null
    },
-   "desejos": {
+   "wishes": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -692,7 +692,7 @@
     "recall": null,
     "f1": null
    },
-   "preco_max": {
+   "max_price": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -700,7 +700,7 @@
     "recall": null,
     "f1": null
    },
-   "tempo_max_min": {
+   "max_delivery_min": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -708,7 +708,7 @@
     "recall": null,
     "f1": null
    },
-   "nota_min": {
+   "min_rating": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -716,7 +716,7 @@
     "recall": null,
     "f1": null
    },
-   "pessoas": {
+   "people": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -724,7 +724,7 @@
     "recall": null,
     "f1": null
    },
-   "frete_gratis": {
+   "free_delivery": {
     "tp": 0,
     "fp": 0,
     "fn": 0,
@@ -732,7 +732,7 @@
     "recall": null,
     "f1": null
    },
-   "alerta_saude": {
+   "health_alert": {
     "tp": 0,
     "fp": 0,
     "fn": 0,

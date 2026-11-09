@@ -246,7 +246,7 @@ def prever(texto: str) -> Pedido:
     t = _n(texto)
     it = intencao(t)
     if it != "pedido":
-        return Pedido(intencao=it)
+        return Pedido(intent=it)
     cats, xcat, xing = categorias_e_exclusoes(t)
     pes = pessoas(t)
     rest, parc = restricoes(t, pes is not None and pes > 1)
@@ -257,9 +257,9 @@ def prever(texto: str) -> Pedido:
     p, tm, nt = preco(t), tempo(t), nota(t)
     frete = bool(re.search(r"frete gr|entrega gr|sem taxa|taxa zero|taxa gr|frete zer|entrega de graca|"
                            r"nao cobre entrega|nao pago entrega|sem pagar entrega|frete gratis|frete zero", t))
-    return Pedido(categorias=sorted(cats), excluir_categorias=sorted(xcat),
-                  excluir_ingredientes=sorted(x for x in xing if len(x) <= 30)[:8],
-                  restricoes=sorted(rest), restricoes_parciais=sorted(parc), alerta_saude=saude,
-                  preco_max=p if p and p > 0 else None, frete_gratis=frete, tempo_max_min=tm,
-                  nota_min=nt if nt is not None and 0 <= nt <= 5 else None,
-                  pessoas=pes, desejos=sorted(desejos(t, p is not None, tm is not None, nt is not None, xing)))
+    return Pedido(categories=sorted(cats), exclude_categories=sorted(xcat),
+                  exclude_ingredients=sorted(x for x in xing if len(x) <= 30)[:8],
+                  restrictions=sorted(rest), partial_restrictions=sorted(parc), health_alert=saude,
+                  max_price=p if p and p > 0 else None, free_delivery=frete, max_delivery_min=tm,
+                  min_rating=nt if nt is not None and 0 <= nt <= 5 else None,
+                  people=pes, wishes=sorted(desejos(t, p is not None, tm is not None, nt is not None, xing)))

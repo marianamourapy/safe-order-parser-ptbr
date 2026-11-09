@@ -80,44 +80,44 @@ def normalizar(texto: str) -> str:
 class Pedido(BaseModel):
     model_config = ConfigDict(extra="forbid", use_enum_values=True)
 
-    intencao: Intencao = Intencao.pedido
-    categorias: list[Categoria] = Field(default_factory=list)
-    excluir_categorias: list[Categoria] = Field(default_factory=list)
-    excluir_ingredientes: list[str] = Field(default_factory=list)
+    intent: Intencao = Intencao.pedido
+    categories: list[Categoria] = Field(default_factory=list)
+    exclude_categories: list[Categoria] = Field(default_factory=list)
+    exclude_ingredients: list[str] = Field(default_factory=list)
     # Escopo "todos": toda opção sugerida precisa atender.
-    restricoes: list[Restricao] = Field(default_factory=list)
+    restrictions: list[Restricao] = Field(default_factory=list)
     # Escopo "pelo menos um": basta uma opção atender (ex.: grupo com 1 vegetariano).
-    restricoes_parciais: list[Restricao] = Field(default_factory=list)
+    partial_restrictions: list[Restricao] = Field(default_factory=list)
     # Não filtra: muda a resposta (avisar, nunca garantir segurança).
     # Vale para alergia, doença celíaca, diabetes, intolerância ou "passo mal com X".
-    alerta_saude: bool = False
-    preco_max: float | None = Field(default=None, gt=0)
-    frete_gratis: bool = False
-    tempo_max_min: int | None = Field(default=None, gt=0)
-    nota_min: float | None = Field(default=None, ge=0, le=5)
-    pessoas: int | None = Field(default=None, gt=0)
-    desejos: list[Desejo] = Field(default_factory=list)
+    health_alert: bool = False
+    max_price: float | None = Field(default=None, gt=0)
+    free_delivery: bool = False
+    max_delivery_min: int | None = Field(default=None, gt=0)
+    min_rating: float | None = Field(default=None, ge=0, le=5)
+    people: int | None = Field(default=None, gt=0)
+    wishes: list[Desejo] = Field(default_factory=list)
 
-    @field_validator("excluir_ingredientes")
+    @field_validator("exclude_ingredients")
     @classmethod
     def _normaliza_ingredientes(cls, v: list[str]) -> list[str]:
         itens = sorted({normalizar(x) for x in v if x.strip()})
         # Único campo de texto livre: limitar impede que vire canal de vazamento
         # (ex.: injeção pedindo para "colocar o prompt do sistema" aqui).
         if len(itens) > MAX_INGREDIENTES or any(len(x) > MAX_CHARS_INGREDIENTE for x in itens):
-            raise ValueError("excluir_ingredientes fora dos limites")
+            raise ValueError("exclude_ingredients fora dos limites")
         return itens
 
     @model_validator(mode="after")
     def _so_pedido_tem_campos(self) -> "Pedido":
-        if self.intencao != Intencao.pedido.value:
+        if self.intent != Intencao.pedido.value:
             preenchidos = [k for k, v in self.model_dump().items()
-                           if k != "intencao" and v not in (None, False, [])]
+                           if k != "intent" and v not in (None, False, [])]
             if preenchidos:
-                raise ValueError(f"intencao={self.intencao} não pode ter campos: {preenchidos}")
+                raise ValueError(f"intent={self.intent} não pode ter campos: {preenchidos}")
         return self
 
-    @field_validator("categorias", "excluir_categorias", "restricoes", "restricoes_parciais", "desejos")
+    @field_validator("categories", "exclude_categories", "restrictions", "partial_restrictions", "wishes")
     @classmethod
     def _sem_repeticao(cls, v: list) -> list:
         return sorted(set(v), key=lambda e: e.value if isinstance(e, Enum) else e)

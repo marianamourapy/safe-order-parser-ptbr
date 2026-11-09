@@ -15,6 +15,11 @@ linhas = [
     "# Conjunto de teste congelado", "",
     f"Congelado em {datetime.date.today().isoformat()}, antes de qualquer modelo ser avaliado.",
     "Qualquer mudança nestes arquivos invalida a comparação com resultados anteriores.", "",
+    "## Histórico", "",
+    "- 07/11/2026: primeiro congelamento.",
+    "- 09/11/2026: só os nomes das chaves do rótulo passaram para inglês (ex.: `preco_max` → `max_price`).",
+    "  Textos e valores verificados idênticos por script. Até aqui, só o baseline por regras tinha sido",
+    "  avaliado, e as métricas dele continuaram idênticas. Nenhum modelo de linguagem foi avaliado antes.", "",
     "| Arquivo | Frases | SHA-256 |", "|---|---|---|",
 ]
 for nome in ARQUIVOS:

@@ -36,8 +36,8 @@ restrições ditas em mensagens anteriores.
 
 ## Onde o Ailo é melhor que este projeto
 O schema v1 não tem campo para ingrediente desejado. "Doce de amendoim" vira só
-`categorias: ["doce"]`, e o filtro, com a alergia no perfil, removeria os doces de amendoim em
-silêncio, sem a confirmação que o Ailo faz. Proposta para a v2: um campo `incluir_ingredientes` e
+`categories: ["doce"]`, e o filtro, com a alergia no perfil, removeria os doces de amendoim em
+silêncio, sem a confirmação que o Ailo faz. Proposta para a v2: um campo `include_ingredients` e
 uma regra no sistema que pede confirmação quando ele conflita com o perfil de saúde.
 
 ## Hipótese (não verificável de fora)
@@ -45,8 +45,8 @@ A restrição é tratada na camada de linguagem (o texto da resposta), mas não 
 aos candidatos que aparecem na lista. O aviso genérico ocupa o lugar do filtro.
 
 ## O que o projeto faz com isso
-1. O modelo extrai as restrições como campos estruturados (`restricoes`, `excluir_ingredientes`,
-   `alerta_saude`), incluindo várias restrições na mesma mensagem.
+1. O modelo extrai as restrições como campos estruturados (`restrictions`, `exclude_ingredients`,
+   `health_alert`), incluindo várias restrições na mesma mensagem.
 2. Um perfil de sessão acumula as restrições ditas ao longo da conversa.
 3. O filtro aplica essas restrições como regra obrigatória: um item que viola uma restrição não
    aparece na lista, com ou sem aviso.
