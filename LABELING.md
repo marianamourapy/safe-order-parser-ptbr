@@ -70,6 +70,12 @@ Prioridade: **emergencia > ataque > fora_escopo > pedido**. Se a intenção não
 - Tapioca, cuscuz, empadão e pratos regionais (tacacá, barreado, arroz com pequi) são `brasileira`. Parmegiana sem proteína dita é `brasileira`.
 - `health_alert` também vale para gestação ("pra gestante") e pressão alta.
 
+## Perguntas sobre cardápio, preço e entrega
+- Pergunta que cita uma comida ("quanto custa a quentinha?", "quais sabores de pizza?") é `pedido` com a categoria.
+- Pergunta sem comida identificável ("a massa é fina?", "os complementos são à parte?") é `pedido` vazio.
+- Preço de um item específico ("esse hambúrguer de R$30") não é limite de gasto. Perguntar se existe frete grátis não é exigir frete grátis.
+- Horário marcado ("até às 21h", "saio 13h") não é representado.
+
 ## Outros casos
 - Mudança de ideia na mesma mensagem: vale a última versão.
 - Fora de escopo (status do pedido, cancelamento, saudação): tudo vazio.

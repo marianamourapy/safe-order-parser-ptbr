@@ -42,11 +42,16 @@ def para_json(p: Pedido) -> str:
 
 
 def de_json(texto: str) -> Pedido:
-    """Lê a saída do modelo. Levanta erro se não for JSON válido no schema."""
-    texto = texto.strip()
-    if texto.startswith("```"):
-        texto = texto.strip("`").removeprefix("json").strip()
-    return Pedido.model_validate(json.loads(texto))
+    """Lê a saída do modelo. Levanta erro se não houver um JSON válido no schema.
+
+    Tolerante com o que não muda o significado: cercas de código, texto antes ou depois
+    do JSON e campos com valor nulo. Assim um modelo prolixo não é punido só pela forma.
+    """
+    inicio = texto.find("{")
+    if inicio < 0:
+        raise ValueError("sem JSON na saída")
+    dados, _ = json.JSONDecoder().raw_decode(texto[inicio:])
+    return Pedido.model_validate({k: v for k, v in dados.items() if v is not None})
 
 
 def mensagens(texto: str, rotulo: Pedido | None = None) -> list[dict]:

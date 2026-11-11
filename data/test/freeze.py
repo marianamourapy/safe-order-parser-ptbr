@@ -9,7 +9,8 @@ import hashlib
 from pathlib import Path
 
 PASTA = Path(__file__).resolve().parent
-ARQUIVOS = ["test_main.jsonl", "test_author2.jsonl", "test_human.jsonl", "test_human_safety.jsonl"]
+ARQUIVOS = ["test_main.jsonl", "test_author2.jsonl", "test_human.jsonl", "test_human_safety.jsonl",
+            "test_human_restaurant.jsonl"]
 
 linhas = [
     "# Conjunto de teste congelado", "",
@@ -19,7 +20,9 @@ linhas = [
     "- 07/11/2026: primeiro congelamento.",
     "- 09/11/2026: só os nomes das chaves do rótulo passaram para inglês (ex.: `preco_max` → `max_price`).",
     "  Textos e valores verificados idênticos por script. Até aqui, só o baseline por regras tinha sido",
-    "  avaliado, e as métricas dele continuaram idênticas. Nenhum modelo de linguagem foi avaliado antes.", "",
+    "  avaliado, e as métricas dele continuaram idênticas. Nenhum modelo de linguagem foi avaliado antes.",
+    "- 10/11/2026: novo conjunto `test_human_restaurant.jsonl` (63 mensagens reais para um restaurante, em quatro lotes no mesmo dia),",
+    "  incluído antes da primeira avaliação de um modelo de linguagem.", "",
     "| Arquivo | Frases | SHA-256 |", "|---|---|---|",
 ]
 for nome in ARQUIVOS:

@@ -74,3 +74,11 @@ def test_gerador_rotulo_bate_com_texto_em_numeros():
             alvo = f"{r['min_rating']:.1f}"
             assert any(f in ex["texto"] for f in (alvo, alvo.replace(".", ","), "quatro e meio")) or \
                 r["min_rating"].is_integer(), ex
+
+
+def test_de_json_tolera_forma_mas_nao_conteudo():
+    from order_parser.output_format import de_json
+    assert de_json('```json\n{"categories": ["pizza"], "max_price": null}\n```\nEspero ter ajudado!').categories == ["pizza"]
+    for ruim in ['{"categories": ["brasiliera"]}', '{"categories": ["pizza"', "não sei"]:
+        with pytest.raises(Exception):
+            de_json(ruim)

@@ -190,6 +190,81 @@ for frase in [
     P(frase, tipo="ataque")
 
 
+# Mensagens reais de clientes para um restaurante (amigos e familiares da autora, 10/11/2026).
+# Texto original preservado; só um endereço foi removido. Muitas são perguntas sobre cardápio e
+# preço: quando citam uma comida, são `pedido` com a categoria; sem comida, `pedido` vazio.
+R, P = novo()
+P("Olá bom dia gostaria de pedir uma quentinha, quanto custa", cat=["marmita"])
+P("Olá bom dia gostaria de pedir uma marmita com vocês, quanto custa", cat=["marmita"])
+P("Olá boa tarde, gostaria de pedir uma marmita, de preferência com algo que tenha frango por favor, quanto custa ?", cat=["marmita"])
+P("Olá tudo bem, gostaria de pedir uma quentinha com vocês, macarrão com carne moída sem batata porfavor", cat=["marmita"], xing=["batata"])
+P("Boa tarde,Gostaria de uma quentinha para agora queria se possível que seja um pouco rápido pois não tenho tempo", cat=["marmita"], des=["rapido"])
+P("Bom dia Poderia mandar aquela minha refeição de sempre da minha dieta só salada e uma proteína.Vou ficar aguardando saio às 12h", lim=True, cat=["salada"], des=["saudavel"])
+P("Oi gente Bom dia hoje preciso de uma refeição caprichada vou receber uma visita inesperada de quatro pessoas manda quatro quentinhas no capricho só que 2 sem feijão fico aguardando para 13h", lim=True, cat=["marmita"], des=["farto"], pessoas=4)
+P("Oi Bom dia adorei o cardápio de ontem pode mandar hoje um pouco mais cedo.", lim=True)
+P("Oi Bom dia vi aqui sua propaganda de refeição mas não vi o valor poderia me dizer por favor gostei do cardápio de hoje e queria uma .")
+P("Oi gostei do cardápio de hoje adoro peixe com pirão poderia me mandar uma com tudo que tem direito para às 12 h aqui faço o Pix.", lim=True, cat=["peixe"], des=["farto"])
+P("Boa noite, estão fazendo entregas em [bairro]? Gostaria de confirmar os sabores das pizzas doces, alguma com   Nutella e Ninho meio a meio ?", cat=["pizza"])
+P("A massa é fina ?", lim=True)
+P("Boa tarde, vai começar as entregas de salgadinhos que horas ? Quero 5 sabores diversos,  pode ser coxinha de frango, queijo com presunto , camarão,  kibe e bolinha de queijo com alho .", cat=["salgado"])
+P("Me passa o valor total de 50 unidades", lim=True)
+P("Tem alguma promoção no cardápio?", des=["barato"])
+P("Boa tarde, um pedido de Mac hambúrguer completo + batata + 1 coca light em lata", cat=["hamburguer", "bebida"])
+P("Prazo de entrega e o valor total com delivery, pagamento débito", lim=True)
+P("Bom dia , quero uma quentinha para entregar no endereço [removido] . Escolhi do cardápio de hoje , a dica do chefe ! Só retira a porção de batata frita e farofa  por favor .", cat=["marmita"], xing=["batata frita", "farofa"])
+P("Boa noite , pode me dar o valor de 2 pizzas tamanho Família ? Pode ser de 4 sabores ? Entrega até às 21 horas.  Tem refrigerante de 2 litros e quais vcs tem", lim=True, cat=["pizza", "bebida"])
+P("Bom dia , vcs fazem kit quentinhos para uma semana de almoço e por acaso tem cardápio vegano? A entrega tem valor ou por conta da casa ? Se pedir um valor acima de 100, 00 o delivery é grátis?", lim=True, cat=["marmita"], rest=["vegano"])
+P("Bom dia, no cardápio só tem opções de açaí natural ou  tem sabores diversos ?", cat=["acai"])
+P("Os complementos são cobrados a parte ou tudo incluído?", lim=True)
+P("Olá, boa tarde! Qual o valor da quentinha?", cat=["marmita"])
+P("oiii, tem torta cookie?", cat=["doce"])
+P("Olá, boa noite! Poderia tirar o tomate do hambúrguer? ", cat=["hamburguer"], xing=["tomate"])
+P("Bom dia! esse bolo de 25 fatias renderia para quantas pessoas?", cat=["doce"])
+P("Olá, gostaria de indicações de lanches com a entrega grátis.", cat=["lanche"], frete=True)
+P("Boa noite. Vocês já estão abertos? Teria algum cardápio para eu ver?")
+P("Teria alguma previsão de entrega? Tô morrendo de fome kkk", tipo="fora_escopo")
+P("Eu queria pedir esse hambúrguer de R$30, mas sem salada e cebola, por favor", cat=["hamburguer"], xing=["salada", "cebola"])
+P("Eu quero dois desse x-bacon com cheddar, por favor", cat=["hamburguer"])
+P("Boa noite, quais são os sabores de pizza que vocês tem?", cat=["pizza"])
+P("Opa, tudo bom? Gostaria de fazer um pedido de refeição do dia (frango à milanesa), completo.", cat=["marmita"])
+P("Opa, tudo bom? Gostaria de tirar uma dúvida, quanto ficaria uma pizza grande meio doce, meio salgada, isso é possivel? que fosse metade frango, metade chocolate.", cat=["pizza"])
+P("Ta incluído o refri como na promoção da pizza grande? Se nao, pode incluir a coca cola 2 litros por favor.", cat=["bebida"])
+P("Opa,tudo bom? Estao fazendo entrega? Gostaria de pedir o yakisoba misto completo, mas eu estava na duvida, esse misto completo de vcs é que leva todas as opções de carne ne?", cat=["chinesa"])
+P("Incluindo camarão? Se for o caso pode por favor ser sem camarão? Por que eu sou alérgico a camarão, ai vai ser meu ultimo yakisoba em vida kakaka. Entao se puder vou querer um yakisoba misto completo da casa, mas SEM POR CAMARÃO, muito obrigado pela atenção.", cat=["chinesa"], rest=["sem_frutos_do_mar"], saude=True)
+P("Opa, tudo bem? Eu gostaria de pedir uma quentinha completa, com adicional de legumes e creme de milho, a minha seria a de omelete com queijo, só gostaria de tirar uma duvida, esse omelete de voces leva presunto? E o feijao tem carne? É por que eu sou vegetariano, entao se o feijão estiver com carne eu ainda vou querer mas sem feijão, e o omelete se puder ao fazer o meu nao incluir o presunto por favor, de resto pode caprichar, muito obrigado pela atenção.", lim=True, cat=["marmita"], rest=["vegetariano"], xing=["presunto"])
+
+# segundo lote (10/11/2026), mesmas condições
+P("Olá, boa tarde, gostaria de saber as pizzas que vocês possuem hoje.", cat=["pizza"])
+P("Olá, boa tarde, qual seria o valor das pizzas ou do combo? ", cat=["pizza"])
+P("Olá, gostaria de saber o valor da pizza, mas seria possível retirar a cebola? Pois tenho alergia. ", cat=["pizza"], xing=["cebola"], saude=True)
+P("Olá, gostaria de pedir algumas pizzas, mas poderia me dar uma sugestão? Quantas pizzas seria interessante para 5 pessoas?", cat=["pizza"], pessoas=5)
+P("Olá, gostaria de pedir uma pizza, mas queria saber se é possível fazer metade doce e metade salgada?", cat=["pizza"])
+P("Bom dia! Gostaria de saber os valores do hambúrguer tradicional e taxa de entrega para minha casa, por favor", cat=["hamburguer"])
+P("Olá, gostaria de saber o valor do combo de hambúrguer, batata frita  e refrigerante por favor. A taxa de entrega para…, obrigada!", cat=["hamburguer", "bebida"])
+P("Bom dia, gostaria de pedir o hambúrguer tradicional mas sem o bacon por gentileza, existem outros ingredientes neste prato que contenham bacon, presunto, calabresa etc? Se tiver, retirar também", cat=["hamburguer"], xing=["bacon", "presunto", "calabresa"])
+P("Oi! Gostaria de pedir 3x hambúrguer tradicionais, 2x coca lata zero, 1 coca lata tradicional, batata frita G com mussarela e bacon, por favor", cat=["hamburguer", "bebida"])
+P("Quanto ficaria o hambúrguer tradicional com batata frita e suco, com o desconto de 10% da promoção? Pode adicionar também um brownie…", lim=True, cat=["hamburguer", "bebida", "doce"])
+
+# terceiro lote (10/11/2026): a pessoa recebeu só o tipo de situação de cada mensagem
+P("Boa noite, gostaria de pedir 2 xtudo completo e uma coca 2l.", cat=["hamburguer", "bebida"])
+P("olá, boa noite, não consegui encontrar o cardápio, alguma lanche de até 25 reais? contando com frete?", lim=True, cat=["lanche"], preco=25)
+P("olá boa noite, quero pedir um xburguer mas sem queijo e molho,  tenho intolerancia a lactose.", cat=["hamburguer"], rest=["sem_lactose"], xing=["molho"], saude=True)
+P("olá, boa noite! , queria pedir um 1 xtudo, 1 xegg bacon, 2 batatas fritas, 2 cachorros quentes e 1 guarana 2l", cat=["hamburguer", "lanche", "bebida"])
+P("quero uma pizza calabresa, mas preciso sair pra viagem em 1 hora, será que chega antes?", cat=["pizza"], tempo=60)
+P("boa noite, quero pedir 50 salgadinhos mas queria tirar os de camarão pq tenho alergia.", cat=["salgado"], rest=["sem_frutos_do_mar"], saude=True)
+P("boa noite, quero pedir um xtudo mas sem alface, tomate, cebola e sem passas por favor. se possivel enviar maionese temperada", cat=["hamburguer"], xing=["alface", "tomate", "cebola", "passas"])
+P("estou na duvida do que pode ser bom pra hoje a noite, somos duas pessoas e não queremos nada que tenha frango, pode ajudar?", pessoas=2, xcat=["frango"])
+P("opa, consegue trocar a coca normal por zero? coloquei errado no pedido", tipo="fora_escopo")
+P("Boa noiteee, queria pedir alguma coisa pra jantar . A gente tá com muita fome, mas sem ideia do que comer kkkkk. Pode ser pizza, japonês ou alguma coisa diferente.", cat=["pizza", "japonesa"], des=["diferente"])
+
+# quarto lote (10/11/2026)
+P("Opa, boa noite, gostaria de uma pizza marguerita e uma coca zero, no mesmo endereco de sempre. pagamento no pix.", cat=["pizza", "bebida"])
+P("opa boa noite, queria um cento de salgados por favor, no mesmo endereco de sempre, se puder dar uma prioridade iria ajudar muito, chegou visita em casa q eu nao tava esperando.", cat=["salgado"], des=["rapido"])
+P("opa, boa tarde, quero um hot dog sem uva passa por favor, delivery no pix", cat=["lanche"], xing=["uva passa"])
+P("boa tarde, to precisando de duas pizzas m, uma de quatro queijos, outra metade marguerita e metade calabresa, duas latas de coca zero e duas pizzas brotinho de brigadeiro, troco pra 100 no dinheiro", cat=["pizza", "bebida"])
+P("Opa, bom dia! vou querer da marmita com carne de boi, pode colocar mais salada, se possivel mandar ela num potinho separado pra nao murchar. Um pouco menos de arroz. Manda uma lata de guarana zero tambem por favor, nao vou precisar de talher de plastico, ja tenho aqui. vou passar no credito MasterCard, obrigado! ", lim=True, cat=["marmita", "bebida"])
+
+
 def salvar(lista, nome, prefixo, fonte):
     textos = [x["texto"].lower() for x in lista]
     assert len(set(textos)) == len(textos), f"duplicada em {nome}"
@@ -205,3 +280,5 @@ if __name__ == "__main__":
     salvar(A, "test_author2.jsonl", "a", "llm_autor2")
     salvar(H, "test_human.jsonl", "h", "humano")
     salvar(S, "test_human_safety.jsonl", "s", "humano_guiado")
+    assert len(R) == 63, len(R)
+    salvar(R, "test_human_restaurant.jsonl", "r", "humano_para_restaurante")

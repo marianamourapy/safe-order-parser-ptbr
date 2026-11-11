@@ -762,5 +762,179 @@
     10
    ]
   }
+ },
+ "humano_restaurante": {
+  "n": 63,
+  "json_valido": 1.0,
+  "ic95_json_valido": [
+   0.9425268096514744,
+   0.9999999999999999
+  ],
+  "exato": 0.38095238095238093,
+  "ic95_exato": [
+   0.27117289491083674,
+   0.5044159599340502
+  ],
+  "intent": {
+   "pedido": {
+    "suporte": 61,
+    "recall": 1.0,
+    "precisao": 0.9682539682539683,
+    "acertos": 61,
+    "ic95_recall": [
+     0.9407540837980555,
+     1.0
+    ]
+   },
+   "fora_escopo": {
+    "suporte": 2,
+    "recall": 0.0,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.6576280471103807
+    ]
+   },
+   "emergencia": {
+    "suporte": 0,
+    "recall": null,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.0
+    ]
+   },
+   "ataque": {
+    "suporte": 0,
+    "recall": null,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "campos": {
+   "categories": {
+    "tp": 45,
+    "fp": 17,
+    "fn": 20,
+    "precisao": 0.7258064516129032,
+    "recall": 0.6923076923076923,
+    "f1": 0.7086614173228347
+   },
+   "exclude_categories": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 1,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "exclude_ingredients": {
+    "tp": 6,
+    "fp": 7,
+    "fn": 11,
+    "precisao": 0.46153846153846156,
+    "recall": 0.35294117647058826,
+    "f1": 0.4000000000000001
+   },
+   "restrictions": {
+    "tp": 4,
+    "fp": 1,
+    "fn": 1,
+    "precisao": 0.8,
+    "recall": 0.8,
+    "f1": 0.8000000000000002
+   },
+   "partial_restrictions": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "wishes": {
+    "tp": 5,
+    "fp": 3,
+    "fn": 2,
+    "precisao": 0.625,
+    "recall": 0.7142857142857143,
+    "f1": 0.6666666666666666
+   },
+   "max_price": {
+    "tp": 1,
+    "fp": 1,
+    "fn": 0,
+    "precisao": 0.5,
+    "recall": 1.0,
+    "f1": 0.6666666666666666
+   },
+   "max_delivery_min": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "precisao": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "min_rating": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "people": {
+    "tp": 2,
+    "fp": 1,
+    "fn": 1,
+    "precisao": 0.6666666666666666,
+    "recall": 0.6666666666666666,
+    "f1": 0.6666666666666666
+   },
+   "free_delivery": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "precisao": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "health_alert": {
+    "tp": 4,
+    "fp": 0,
+    "fn": 0,
+    "precisao": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   }
+  },
+  "micro_precisao": 0.69,
+  "micro_recall": 0.6571428571428571,
+  "micro_f1": 0.6731707317073171,
+  "restricoes_completas": 0.8,
+  "restricoes_completas_n": 5,
+  "ic95_restricoes_completas": [
+   0.3755282641185388,
+   0.9637768390302125
+  ],
+  "multi_restricoes_completas": null,
+  "multi_restricoes_n": 0,
+  "alerta_saude_recall": 1.0,
+  "alerta_saude_n": 4,
+  "inventou_em_vazios": 0.14285714285714285,
+  "vazios_n": 7,
+  "exato_por_tag": {
+   "humano_restaurante": [
+    0.38095238095238093,
+    63
+   ]
+  }
  }
 }

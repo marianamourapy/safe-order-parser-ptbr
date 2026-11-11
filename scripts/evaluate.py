@@ -18,7 +18,8 @@ from order_parser.schema import Pedido
 
 RAIZ = Path(__file__).resolve().parents[1]
 CONJUNTOS = {"principal": "test_main.jsonl", "autor2": "test_author2.jsonl", "humano": "test_human.jsonl",
-             "humano_seguranca": "test_human_safety.jsonl"}
+             "humano_seguranca": "test_human_safety.jsonl",
+             "humano_restaurante": "test_human_restaurant.jsonl"}
 
 
 def carregar(nome):
