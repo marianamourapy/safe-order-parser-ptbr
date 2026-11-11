@@ -1,6 +1,6 @@
 """Demo: mensagem -> pedido estruturado -> filtro no catálogo fictício.
 
-Roda como Space do Hugging Face (SDK Gradio) ou localmente: `python demo/app.py`.
+Roda localmente ou em um notebook com GPU: `python demo/app.py` (GRADIO_SHARE=1 cria um link temporário).
 Defina ADAPTER_ID com o repositório do adaptador LoRA para usar o modelo ajustado;
 sem isso, a demo usa o baseline por regras, para o filtro poder ser testado sozinho.
 """
@@ -8,7 +8,9 @@ import os
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+_AQUI = Path(__file__).resolve().parent
+sys.path.insert(0, str(_AQUI))                    # no Space, o pacote order_parser fica ao lado do app.py
+sys.path.insert(0, str(_AQUI.parent / "src"))     # no repositório, fica em src/
 
 import gradio as gr
 
@@ -29,7 +31,7 @@ def _carregar():
         from transformers import AutoTokenizer
         tok = AutoTokenizer.from_pretrained(ADAPTER_ID)
         model = AutoPeftModelForCausalLM.from_pretrained(ADAPTER_ID, torch_dtype=torch.float32)
-        model.eval()
+        model.to("cuda" if torch.cuda.is_available() else "cpu").eval()
         _modelo = (tok, model)
     return _modelo
 
@@ -41,7 +43,7 @@ def interpretar(texto: str) -> tuple[Pedido, str]:
     import torch
     tok, model = _carregar()
     prompt = tok.apply_chat_template(mensagens(texto), tokenize=False, add_generation_prompt=True)
-    enc = tok(prompt, return_tensors="pt")
+    enc = tok(prompt, return_tensors="pt").to(model.device)
     with torch.no_grad():
         out = model.generate(**enc, max_new_tokens=128, do_sample=False)
     bruto = tok.decode(out[0][enc["input_ids"].shape[1]:], skip_special_tokens=True)
@@ -73,8 +75,12 @@ def responder(texto, historico, perfil):
 
 with gr.Blocks(title="safe-order-parser-ptbr") as app:
     gr.Markdown("# Do desejo ao pedido\nRestrições alimentares que viram filtro, não só aviso. "
-                "**Catálogo, restaurantes e preços são fictícios.** Não use para decisões reais sobre alergias.")
-    chat = gr.Chatbot(type="messages", height=420)
+                "**Catálogo, restaurantes e preços são fictícios.** Não use para decisões reais sobre alergias.\n\n"
+                "O modelo roda em CPU: a primeira mensagem demora mais (carrega o modelo) e as seguintes levam alguns segundos.")
+    try:
+        chat = gr.Chatbot(type="messages", height=420)
+    except TypeError:   # versões do Gradio em que esse já é o único formato
+        chat = gr.Chatbot(height=420)
     caixa = gr.Textbox(placeholder="Ex.: sou celíaca e vegetariana", label="Mensagem")
     perfil = gr.State()
     gr.Examples(["tenho alergia a leite", "me sugere um doce", "sou celíaca e vegetariana", "me vê uma pizza",
@@ -83,4 +89,4 @@ with gr.Blocks(title="safe-order-parser-ptbr") as app:
     gr.Button("Nova conversa").click(lambda: ([], None), None, [chat, perfil])
 
 if __name__ == "__main__":
-    app.launch()
+    app.launch(share=bool(os.environ.get("GRADIO_SHARE")))

@@ -81,6 +81,24 @@ Estas ideias vieram de olhar os erros no próprio teste. Para virarem resultado,
 
 O filtro, por construção, não devolve item que viole uma restrição: um teste automatizado percorre todas as combinações de até 3 restrições e reproduz as conversas da auditoria.
 
+## Demo
+
+A demo roda o modelo ajustado e o filtro sobre um catálogo fictício. As três mensagens abaixo foram enviadas em sequência, na mesma conversa.
+
+**1. O modelo inventa um campo.** "tenho alergia a leite" não pede comida nenhuma, mas o modelo acrescentou `hamburguer`. É o erro mais comum medido na avaliação. O filtro, ainda assim, só devolveu itens sem leite.
+
+![Mensagem "tenho alergia a leite": o modelo extrai a alergia e inventa a categoria hambúrguer](docs/demo_1_invented_field.png)
+
+**2. A restrição continua valendo.** "me sugere um doce" não repete a alergia. O perfil da sessão a mantém, e os doces sugeridos não têm leite.
+
+![Mensagem "me sugere um doce": o perfil da sessão aplica a alergia a leite da mensagem anterior](docs/demo_2_session_profile.png)
+
+**3. Pedido contraditório.** "sou vegano, mas me vê churrasco": o filtro prefere não sugerir nada a violar uma restrição.
+
+![Mensagem "sou vegano, mas me vê churrasco": nenhuma opção atende a todos os critérios](docs/demo_3_conflict.png)
+
+Para rodar: `python demo/app.py` com a variável `ADAPTER_ID` apontando para o adaptador (sem ela, a demo usa o baseline por regras).
+
 ## Como a avaliação foi feita
 
 | Conjunto | Frases | Quem escreveu |
