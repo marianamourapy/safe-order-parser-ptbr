@@ -1,0 +1,17 @@
+{
+ "zero_shot": {
+  "tokens_entrada": 346.8268330733229,
+  "tokens_saida": 107.51482059282371,
+  "seg_por_msg": 0.490003689588883
+ },
+ "few_shot": {
+  "tokens_entrada": 661.826833073323,
+  "tokens_saida": 20.898595943837755,
+  "seg_por_msg": 0.3261624167378347
+ },
+ "lora": {
+  "tokens_entrada": 346.8268330733229,
+  "tokens_saida": 14.722308892355695,
+  "seg_por_msg": 0.22085513823117928
+ }
+}

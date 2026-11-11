@@ -1,0 +1,940 @@
+{
+ "principal": {
+  "n": 438,
+  "json_valido": 0.4726027397260274,
+  "ic95_json_valido": [
+   0.4262881778560687,
+   0.519393713572896
+  ],
+  "exato": 0.03424657534246575,
+  "ic95_exato": [
+   0.020861663583829,
+   0.055730490708569
+  ],
+  "intent": {
+   "pedido": {
+    "suporte": 367,
+    "recall": 1.0,
+    "precisao": 0.8378995433789954,
+    "acertos": 367,
+    "ic95_recall": [
+     0.9896408601408255,
+     1.0
+    ]
+   },
+   "fora_escopo": {
+    "suporte": 21,
+    "recall": 0.0,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.15464382326420195
+    ]
+   },
+   "emergencia": {
+    "suporte": 25,
+    "recall": 0.0,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.13319649395317873
+    ]
+   },
+   "ataque": {
+    "suporte": 25,
+    "recall": 0.0,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.13319649395317873
+    ]
+   }
+  },
+  "campos": {
+   "categories": {
+    "tp": 92,
+    "fp": 119,
+    "fn": 191,
+    "precisao": 0.43601895734597157,
+    "recall": 0.3250883392226148,
+    "f1": 0.3724696356275304
+   },
+   "exclude_categories": {
+    "tp": 4,
+    "fp": 14,
+    "fn": 31,
+    "precisao": 0.2222222222222222,
+    "recall": 0.11428571428571428,
+    "f1": 0.1509433962264151
+   },
+   "exclude_ingredients": {
+    "tp": 10,
+    "fp": 72,
+    "fn": 32,
+    "precisao": 0.12195121951219512,
+    "recall": 0.23809523809523808,
+    "f1": 0.16129032258064516
+   },
+   "restrictions": {
+    "tp": 19,
+    "fp": 256,
+    "fn": 36,
+    "precisao": 0.06909090909090909,
+    "recall": 0.34545454545454546,
+    "f1": 0.11515151515151516
+   },
+   "partial_restrictions": {
+    "tp": 0,
+    "fp": 27,
+    "fn": 29,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "wishes": {
+    "tp": 15,
+    "fp": 142,
+    "fn": 81,
+    "precisao": 0.09554140127388536,
+    "recall": 0.15625,
+    "f1": 0.11857707509881424
+   },
+   "max_price": {
+    "tp": 32,
+    "fp": 5,
+    "fn": 26,
+    "precisao": 0.8648648648648649,
+    "recall": 0.5517241379310345,
+    "f1": 0.6736842105263158
+   },
+   "max_delivery_min": {
+    "tp": 15,
+    "fp": 13,
+    "fn": 16,
+    "precisao": 0.5357142857142857,
+    "recall": 0.4838709677419355,
+    "f1": 0.5084745762711865
+   },
+   "min_rating": {
+    "tp": 15,
+    "fp": 10,
+    "fn": 14,
+    "precisao": 0.6,
+    "recall": 0.5172413793103449,
+    "f1": 0.5555555555555556
+   },
+   "people": {
+    "tp": 21,
+    "fp": 29,
+    "fn": 31,
+    "precisao": 0.42,
+    "recall": 0.40384615384615385,
+    "f1": 0.4117647058823529
+   },
+   "free_delivery": {
+    "tp": 20,
+    "fp": 16,
+    "fn": 14,
+    "precisao": 0.5555555555555556,
+    "recall": 0.5882352941176471,
+    "f1": 0.5714285714285715
+   },
+   "health_alert": {
+    "tp": 3,
+    "fp": 0,
+    "fn": 26,
+    "precisao": 1.0,
+    "recall": 0.10344827586206896,
+    "f1": 0.1875
+   }
+  },
+  "micro_precisao": 0.25922023182297155,
+  "micro_recall": 0.3182406209573092,
+  "micro_f1": 0.28571428571428575,
+  "restricoes_completas": 0.3974358974358974,
+  "restricoes_completas_n": 78,
+  "ic95_restricoes_completas": [
+   0.29611695255788584,
+   0.5083834482162926
+  ],
+  "multi_restricoes_completas": 0.0,
+  "multi_restricoes_n": 6,
+  "alerta_saude_recall": 0.10344827586206896,
+  "alerta_saude_n": 29,
+  "inventou_em_vazios": 0.7142857142857143,
+  "vazios_n": 7,
+  "exato_por_tag": {
+   "ambiguidade": [
+    0.0,
+    10
+   ],
+   "app": [
+    0.1,
+    20
+   ],
+   "ataque": [
+    0.0,
+    25
+   ],
+   "conversacional": [
+    0.0,
+    20
+   ],
+   "digitacao": [
+    0.0,
+    10
+   ],
+   "emergencia": [
+    0.0,
+    25
+   ],
+   "farmacia": [
+    0.0,
+    10
+   ],
+   "fora_escopo": [
+    0.0,
+    10
+   ],
+   "grupo": [
+    0.0,
+    40
+   ],
+   "informal": [
+    0.05,
+    40
+   ],
+   "mudanca": [
+    0.0,
+    10
+   ],
+   "multi": [
+    0.044444444444444446,
+    45
+   ],
+   "negacao": [
+    0.044444444444444446,
+    45
+   ],
+   "restricao": [
+    0.12,
+    25
+   ],
+   "saude": [
+    0.0,
+    23
+   ],
+   "simples": [
+    0.12,
+    25
+   ],
+   "transcricao": [
+    0.0,
+    20
+   ],
+   "vago": [
+    0.02857142857142857,
+    35
+   ]
+  }
+ },
+ "autor2": {
+  "n": 100,
+  "json_valido": 0.45,
+  "ic95_json_valido": [
+   0.3561437510640346,
+   0.5475557296835656
+  ],
+  "exato": 0.1,
+  "ic95_exato": [
+   0.05522854161313613,
+   0.1743673043676654
+  ],
+  "intent": {
+   "pedido": {
+    "suporte": 92,
+    "recall": 1.0,
+    "precisao": 0.92,
+    "acertos": 92,
+    "ic95_recall": [
+     0.9599171967079014,
+     1.0
+    ]
+   },
+   "fora_escopo": {
+    "suporte": 8,
+    "recall": 0.0,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.3244156195108769
+    ]
+   },
+   "emergencia": {
+    "suporte": 0,
+    "recall": null,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.0
+    ]
+   },
+   "ataque": {
+    "suporte": 0,
+    "recall": null,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "campos": {
+   "categories": {
+    "tp": 13,
+    "fp": 48,
+    "fn": 43,
+    "precisao": 0.21311475409836064,
+    "recall": 0.23214285714285715,
+    "f1": 0.22222222222222224
+   },
+   "exclude_categories": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 6,
+    "precisao": null,
+    "recall": 0.0,
+    "f1": null
+   },
+   "exclude_ingredients": {
+    "tp": 5,
+    "fp": 24,
+    "fn": 19,
+    "precisao": 0.1724137931034483,
+    "recall": 0.20833333333333334,
+    "f1": 0.18867924528301888
+   },
+   "restrictions": {
+    "tp": 2,
+    "fp": 83,
+    "fn": 7,
+    "precisao": 0.023529411764705882,
+    "recall": 0.2222222222222222,
+    "f1": 0.0425531914893617
+   },
+   "partial_restrictions": {
+    "tp": 0,
+    "fp": 5,
+    "fn": 1,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "wishes": {
+    "tp": 0,
+    "fp": 55,
+    "fn": 16,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "max_price": {
+    "tp": 3,
+    "fp": 3,
+    "fn": 7,
+    "precisao": 0.5,
+    "recall": 0.3,
+    "f1": 0.37499999999999994
+   },
+   "max_delivery_min": {
+    "tp": 0,
+    "fp": 5,
+    "fn": 2,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "min_rating": {
+    "tp": 0,
+    "fp": 2,
+    "fn": 1,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "people": {
+    "tp": 6,
+    "fp": 7,
+    "fn": 6,
+    "precisao": 0.46153846153846156,
+    "recall": 0.5,
+    "f1": 0.48000000000000004
+   },
+   "free_delivery": {
+    "tp": 1,
+    "fp": 4,
+    "fn": 1,
+    "precisao": 0.2,
+    "recall": 0.5,
+    "f1": 0.28571428571428575
+   },
+   "health_alert": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 5,
+    "precisao": null,
+    "recall": 0.0,
+    "f1": null
+   }
+  },
+  "micro_precisao": 0.11278195488721804,
+  "micro_recall": 0.20833333333333334,
+  "micro_f1": 0.14634146341463414,
+  "restricoes_completas": 0.2,
+  "restricoes_completas_n": 10,
+  "ic95_restricoes_completas": [
+   0.056680947980693314,
+   0.5098431532792765
+  ],
+  "multi_restricoes_completas": null,
+  "multi_restricoes_n": 0,
+  "alerta_saude_recall": 0.0,
+  "alerta_saude_n": 5,
+  "inventou_em_vazios": 0.3,
+  "vazios_n": 10,
+  "exato_por_tag": {
+   "autor2": [
+    0.1,
+    100
+   ]
+  }
+ },
+ "humano": {
+  "n": 30,
+  "json_valido": 0.36666666666666664,
+  "ic95_json_valido": [
+   0.21873702204017678,
+   0.5448675356639506
+  ],
+  "exato": 0.13333333333333333,
+  "ic95_exato": [
+   0.05309569424218104,
+   0.2968168394441695
+  ],
+  "intent": {
+   "pedido": {
+    "suporte": 28,
+    "recall": 1.0,
+    "precisao": 0.9333333333333333,
+    "acertos": 28,
+    "ic95_recall": [
+     0.8793527963418923,
+     1.0
+    ]
+   },
+   "fora_escopo": {
+    "suporte": 2,
+    "recall": 0.0,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.6576280471103807
+    ]
+   },
+   "emergencia": {
+    "suporte": 0,
+    "recall": null,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.0
+    ]
+   },
+   "ataque": {
+    "suporte": 0,
+    "recall": null,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "campos": {
+   "categories": {
+    "tp": 3,
+    "fp": 8,
+    "fn": 16,
+    "precisao": 0.2727272727272727,
+    "recall": 0.15789473684210525,
+    "f1": 0.19999999999999998
+   },
+   "exclude_categories": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 0,
+    "precisao": 0.0,
+    "recall": null,
+    "f1": null
+   },
+   "exclude_ingredients": {
+    "tp": 0,
+    "fp": 2,
+    "fn": 1,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "restrictions": {
+    "tp": 0,
+    "fp": 13,
+    "fn": 3,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "partial_restrictions": {
+    "tp": 0,
+    "fp": 2,
+    "fn": 2,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "wishes": {
+    "tp": 2,
+    "fp": 7,
+    "fn": 12,
+    "precisao": 0.2222222222222222,
+    "recall": 0.14285714285714285,
+    "f1": 0.17391304347826086
+   },
+   "max_price": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "precisao": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "max_delivery_min": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 0,
+    "precisao": 0.0,
+    "recall": null,
+    "f1": null
+   },
+   "min_rating": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 0,
+    "precisao": 0.0,
+    "recall": null,
+    "f1": null
+   },
+   "people": {
+    "tp": 2,
+    "fp": 2,
+    "fn": 2,
+    "precisao": 0.5,
+    "recall": 0.5,
+    "f1": 0.5
+   },
+   "free_delivery": {
+    "tp": 0,
+    "fp": 3,
+    "fn": 0,
+    "precisao": 0.0,
+    "recall": null,
+    "f1": null
+   },
+   "health_alert": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 4,
+    "precisao": null,
+    "recall": 0.0,
+    "f1": null
+   }
+  },
+  "micro_precisao": 0.16666666666666666,
+  "micro_recall": 0.16666666666666666,
+  "micro_f1": 0.16666666666666666,
+  "restricoes_completas": 0.0,
+  "restricoes_completas_n": 4,
+  "ic95_restricoes_completas": [
+   0.0,
+   0.48990002040399916
+  ],
+  "multi_restricoes_completas": 0.0,
+  "multi_restricoes_n": 1,
+  "alerta_saude_recall": 0.0,
+  "alerta_saude_n": 4,
+  "inventou_em_vazios": 0.5,
+  "vazios_n": 8,
+  "exato_por_tag": {
+   "humano": [
+    0.13333333333333333,
+    30
+   ]
+  }
+ },
+ "humano_seguranca": {
+  "n": 10,
+  "json_valido": 0.2,
+  "ic95_json_valido": [
+   0.056680947980693314,
+   0.5098431532792765
+  ],
+  "exato": 0.0,
+  "ic95_exato": [
+   0.0,
+   0.2775401687666166
+  ],
+  "intent": {
+   "pedido": {
+    "suporte": 0,
+    "recall": null,
+    "precisao": 0.0,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.0
+    ]
+   },
+   "fora_escopo": {
+    "suporte": 0,
+    "recall": null,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.0
+    ]
+   },
+   "emergencia": {
+    "suporte": 5,
+    "recall": 0.0,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.43449149475208104
+    ]
+   },
+   "ataque": {
+    "suporte": 5,
+    "recall": 0.0,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.43449149475208104
+    ]
+   }
+  },
+  "campos": {
+   "categories": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "exclude_categories": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "exclude_ingredients": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "restrictions": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "partial_restrictions": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "wishes": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "max_price": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "max_delivery_min": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "min_rating": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "people": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "free_delivery": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   },
+   "health_alert": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precisao": null,
+    "recall": null,
+    "f1": null
+   }
+  },
+  "micro_precisao": null,
+  "micro_recall": null,
+  "micro_f1": null,
+  "restricoes_completas": null,
+  "restricoes_completas_n": 0,
+  "ic95_restricoes_completas": [
+   0.0,
+   0.0
+  ],
+  "multi_restricoes_completas": null,
+  "multi_restricoes_n": 0,
+  "alerta_saude_recall": null,
+  "alerta_saude_n": 0,
+  "inventou_em_vazios": null,
+  "vazios_n": 0,
+  "exato_por_tag": {
+   "humano_seguranca": [
+    0.0,
+    10
+   ]
+  }
+ },
+ "humano_restaurante": {
+  "n": 63,
+  "json_valido": 0.5238095238095238,
+  "ic95_json_valido": [
+   0.4027014429047192,
+   0.6421807861263035
+  ],
+  "exato": 0.031746031746031744,
+  "ic95_exato": [
+   0.00874934404029698,
+   0.10856681834959193
+  ],
+  "intent": {
+   "pedido": {
+    "suporte": 61,
+    "recall": 1.0,
+    "precisao": 0.9682539682539683,
+    "acertos": 61,
+    "ic95_recall": [
+     0.9407540837980555,
+     1.0
+    ]
+   },
+   "fora_escopo": {
+    "suporte": 2,
+    "recall": 0.0,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.6576280471103807
+    ]
+   },
+   "emergencia": {
+    "suporte": 0,
+    "recall": null,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.0
+    ]
+   },
+   "ataque": {
+    "suporte": 0,
+    "recall": null,
+    "precisao": null,
+    "acertos": 0,
+    "ic95_recall": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "campos": {
+   "categories": {
+    "tp": 17,
+    "fp": 21,
+    "fn": 48,
+    "precisao": 0.4473684210526316,
+    "recall": 0.26153846153846155,
+    "f1": 0.3300970873786408
+   },
+   "exclude_categories": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "precisao": null,
+    "recall": 0.0,
+    "f1": null
+   },
+   "exclude_ingredients": {
+    "tp": 2,
+    "fp": 20,
+    "fn": 15,
+    "precisao": 0.09090909090909091,
+    "recall": 0.11764705882352941,
+    "f1": 0.10256410256410256
+   },
+   "restrictions": {
+    "tp": 0,
+    "fp": 57,
+    "fn": 5,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "partial_restrictions": {
+    "tp": 0,
+    "fp": 3,
+    "fn": 0,
+    "precisao": 0.0,
+    "recall": null,
+    "f1": null
+   },
+   "wishes": {
+    "tp": 0,
+    "fp": 47,
+    "fn": 7,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "max_price": {
+    "tp": 1,
+    "fp": 8,
+    "fn": 0,
+    "precisao": 0.1111111111111111,
+    "recall": 1.0,
+    "f1": 0.19999999999999998
+   },
+   "max_delivery_min": {
+    "tp": 1,
+    "fp": 9,
+    "fn": 0,
+    "precisao": 0.1,
+    "recall": 1.0,
+    "f1": 0.18181818181818182
+   },
+   "min_rating": {
+    "tp": 0,
+    "fp": 6,
+    "fn": 0,
+    "precisao": 0.0,
+    "recall": null,
+    "f1": null
+   },
+   "people": {
+    "tp": 0,
+    "fp": 13,
+    "fn": 3,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "free_delivery": {
+    "tp": 0,
+    "fp": 7,
+    "fn": 1,
+    "precisao": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "health_alert": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 4,
+    "precisao": null,
+    "recall": 0.0,
+    "f1": null
+   }
+  },
+  "micro_precisao": 0.09905660377358491,
+  "micro_recall": 0.2,
+  "micro_f1": 0.13249211356466878,
+  "restricoes_completas": 0.0,
+  "restricoes_completas_n": 5,
+  "ic95_restricoes_completas": [
+   0.0,
+   0.43449149475208104
+  ],
+  "multi_restricoes_completas": null,
+  "multi_restricoes_n": 0,
+  "alerta_saude_recall": 0.0,
+  "alerta_saude_n": 4,
+  "inventou_em_vazios": 1.0,
+  "vazios_n": 7,
+  "exato_por_tag": {
+   "humano_restaurante": [
+    0.031746031746031744,
+    63
+   ]
+  }
+ }
+}

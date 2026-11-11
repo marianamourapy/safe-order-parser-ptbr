@@ -22,10 +22,62 @@ A hipótese deste projeto: tratar a restrição como **dado estruturado e filtro
 
 ## Resultados
 
-<!-- RESULTADOS: cole aqui o conteúdo de results/summary.md depois de rodar notebooks/train_eval.ipynb -->
-_A preencher com a saída do notebook: regras, Qwen sem ajuste, Qwen com 8 exemplos no prompt e Qwen com LoRA, nos quatro conjuntos de teste._
+**O modelo ajustado superou as regras em segurança, e não em extração.** Ele detecta 97% das emergências e 90% dos ataques (regras: 57% e 50%), mas empata com as regras no conjunto principal e perde nas frases de outro autor. Contra o mesmo Qwen sem ajuste ou com 8 exemplos no prompt, o ajuste ganha em quase todas as métricas, com menos tokens de saída e menos tempo por mensagem.
 
-O que já está medido, com o baseline por regras: o acerto exato cai de 66% nas frases escritas pelo autor do gerador para 38% nas mensagens reais de clientes, e as regras deixam passar 44% das emergências. É esse espaço que o modelo ajustado precisa ocupar.
+### Acerto exato (JSON inteiro correto), com intervalo de 95%
+
+| Conjunto | n | Regras (baseline) | Qwen sem ajuste | Qwen + 8 exemplos no prompt | Qwen + LoRA (este projeto) |
+|---|---|---|---|---|---|
+| Principal (LLM, autor 1) | 438 | 66% [62–71] | 3% [2–6] | 20% [16–24] | 66% [62–70] |
+| Outro autor (LLM) | 100 | 52% [42–62] | 10% [6–17] | 18% [12–27] | 23% [16–32] |
+| Humano | 30 | 50% [33–67] | 13% [5–30] | 23% [12–41] | 40% [25–58] |
+| Humano, mensagens reais p/ restaurante | 63 | 38% [27–50] | 3% [1–11] | 21% [12–32] | 29% [19–41] |
+
+### Micro-F1 dos campos
+
+| Conjunto | Regras (baseline) | Qwen sem ajuste | Qwen + 8 exemplos no prompt | Qwen + LoRA (este projeto) |
+|---|---|---|---|---|
+| Principal (LLM, autor 1) | 90% | 29% | 51% | 86% |
+| Outro autor (LLM) | 72% | 15% | 38% | 61% |
+| Humano | 70% | 17% | 31% | 70% |
+| Humano, mensagens reais p/ restaurante | 67% | 13% | 35% | 63% |
+
+### Segurança e restrições (todos os conjuntos somados)
+
+| Métrica | Regras (baseline) | Qwen sem ajuste | Qwen + 8 exemplos no prompt | Qwen + LoRA (este projeto) |
+|---|---|---|---|---|
+| JSON válido | 641/641 (100%) [99–100] | 298/641 (46%) [43–50] | 413/641 (64%) [61–68] | 604/641 (94%) [92–96] |
+| Restrições completas | 89/97 (92%) [85–96] | 33/97 (34%) [25–44] | 33/97 (34%) [25–44] | 83/97 (86%) [77–91] |
+| Alerta de saúde (recall) | 41/42 (98%) [88–100] | 3/42 (7%) [2–19] | 16/42 (38%) [25–53] | 34/42 (81%) [67–90] |
+| Inventou campos em pedido vazio | 3/32 (9%) [3–24] | 19/32 (59%) [42–74] | 12/32 (38%) [23–55] | 18/32 (56%) [39–72] |
+| Emergência detectada (recall) | 17/30 (57%) [39–73] | 0/30 (0%) [0–11] | 6/30 (20%) [10–37] | 29/30 (97%) [83–99] |
+| Ataque detectado (recall) | 15/30 (50%) [33–67] | 0/30 (0%) [0–11] | 0/30 (0%) [0–11] | 27/30 (90%) [74–97] |
+
+### Custo por mensagem (GPU T4, lote de 16)
+
+| Sistema | Tokens de entrada | Tokens de saída | Segundos por mensagem |
+|---|---|---|---|
+| Qwen sem ajuste | 347 | 107.5 | 0.490 |
+| Qwen + 8 exemplos no prompt | 662 | 20.9 | 0.326 |
+| Qwen + LoRA (este projeto) | 347 | 14.7 | 0.221 |
+
+### O que os erros mostram
+
+Detalhes e exemplos em [`results/error_analysis.md`](results/error_analysis.md), gerado por `scripts/error_analysis.py`.
+
+- **O modelo extrai mais do que as regras, mas inventa o dobro.** Somando todos os conjuntos, ele acerta 942 itens contra 892 das regras e deixa faltar 128 contra 178, mas inventa 318 contra 157. Quase toda a diferença está em `wishes` (91 inventados contra 11) e `categories` (123 contra 67). Como o acerto exato exige o JSON inteiro correto, um item a mais anula a frase.
+- **Ele não aprendeu a responder "nada".** Em 18 de 32 pedidos vagos ("quero algo gostoso", "pede o de sempre") o modelo preencheu algum campo. No treino sintético, quase todo pedido tem algo a extrair.
+- **35 das 37 saídas rejeitadas usam um valor ou uma chave que não existe no schema**, como `"sem_diabetes"`, `"coreana"` ou `"payment_method"`. O JSON em si quase sempre está bem formado.
+- **O alerta de saúde falha quando a pessoa cita a condição pelo nome.** "Sou diabético" e "sou celíaco" geraram a restrição certa, mas sem o alerta ou com um valor inventado que invalidou a saída. É a perda mais séria: 34 de 42 alertas, contra 41 das regras.
+- **Falsos alarmes de intenção:** 18 pedidos comuns foram classificados como fora de escopo (11) ou ataque (7), incluindo uma mensagem sobre alergia grave a amendoim. O ganho em emergências e ataques tem esse custo.
+
+### Próximos passos que os erros apontam
+
+Estas ideias vieram de olhar os erros no próprio teste. Para virarem resultado, precisam ser medidas em frases novas.
+
+1. **Geração restrita ao schema** (*constrained decoding*), para que o modelo só possa escrever chaves e valores permitidos. Eliminaria por construção 35 das 37 saídas rejeitadas.
+2. **Sistema híbrido:** o modelo decide a intenção e as regras extraem os campos dos pedidos. No mesmo teste, essa combinação chega a 73% de acerto exato no conjunto principal, com 29 de 30 emergências, 28 de 30 ataques e 40 de 42 alertas de saúde. O número é otimista, porque a combinação foi escolhida depois de ver o teste.
+3. **Treino com mais pedidos vagos e mais nomes de condições de saúde**, que são os dois padrões de erro acima.
 
 O filtro, por construção, não devolve item que viole uma restrição: um teste automatizado percorre todas as combinações de até 3 restrições e reproduz as conversas da auditoria.
 
@@ -53,6 +105,7 @@ O filtro, por construção, não devolve item que viole uma restrição: um test
 - **As mensagens reais foram escritas para um restaurante, não para um assistente.** Muitas são perguntas sobre cardápio e preço, que o schema representa mal.
 - **O filtro pressupõe um catálogo com ingredientes e marcações confiáveis.** Em cardápios reais isso costuma faltar, e inferir esses atributos é outro problema.
 - **Uma mensagem por vez.** O modelo não lê o histórico; quem lembra das restrições é o perfil da sessão. Pedidos como "o de sempre" ou "troca a bebida" não são representados.
+- **A análise de erros foi feita no próprio teste.** As propostas de melhoria não foram validadas em dados novos.
 - **Detecção de emergência por um modelo de 1,5 B não é solução de segurança.** Um sistema real precisa de moderação dedicada e encaminhamento humano.
 - **A auditoria do Ailo é uma observação pequena**, não uma medida da qualidade do produto.
 
@@ -65,7 +118,8 @@ O filtro, por construção, não devolve item que viole uma restrição: um test
 | `src/order_parser/metrics.py`, `scripts/evaluate.py`, `scripts/compare.py` | Métricas e tabelas |
 | `src/order_parser/baseline.py` | Baseline por regras |
 | `src/order_parser/session.py`, `src/order_parser/catalog.py` | Perfil da sessão, catálogo fictício e filtro |
-| `notebooks/train_eval.ipynb` | Avaliação dos modelos e fine-tuning (Colab, GPU T4) |
+| `notebooks/train_eval.ipynb` | Avaliação dos modelos e fine-tuning (Kaggle ou Colab, GPU T4) |
+| `scripts/error_analysis.py`, `results/` | Análise de erros; métricas e previsões de cada sistema |
 | `demo/app.py` | Demo em Gradio |
 | `LABELING.md` | Guia de rotulagem |
 | `data/test/`, `data/train/` | Testes congelados; treino e validação gerados |
@@ -79,7 +133,11 @@ PYTHONPATH=src python -m order_parser.generator --n 4000 --seed 7   # recria dat
 PYTHONPATH=src python scripts/evaluate.py --sistema baseline        # baseline nos testes
 ```
 
-Para os modelos: abra `notebooks/train_eval.ipynb` no Colab com GPU T4, envie o zip do repositório e execute tudo.
+Para os modelos: abra `notebooks/train_eval.ipynb` no Kaggle ou no Colab com GPU T4, envie o zip do repositório e execute tudo. O treino leva cerca de 40 minutos.
+
+```bash
+PYTHONPATH=src python scripts/error_analysis.py                     # recria results/error_analysis.md
+```
 
 ## Autoria e uso de IA
 
