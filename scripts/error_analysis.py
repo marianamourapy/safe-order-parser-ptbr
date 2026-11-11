@@ -18,8 +18,9 @@ from collections import Counter
 from pathlib import Path
 
 from order_parser.metrics import avaliar
-from order_parser.output_format import de_json
-from order_parser.schema import Categoria, Desejo, Pedido, Restricao
+from order_parser.hybrid import descartando, estrito
+from order_parser.hybrid import hibrido as _hibrido
+from order_parser.schema import Categoria, Desejo, Pedido, Restricao  # noqa: F401
 
 RAIZ = Path(__file__).resolve().parents[1]
 CONJUNTOS = {"Principal": "test_main.jsonl", "Outro autor": "test_author2.jsonl", "Humano": "test_human.jsonl",
@@ -36,14 +37,6 @@ def carregar_teste():
 def carregar_preds(slug):
     linhas = map(json.loads, open(RAIZ / "results" / f"preds_{slug}.jsonl", encoding="utf8"))
     return {r["id"]: r["saida"] for r in linhas}
-
-
-def estrito(saida):
-    """A leitura usada na avaliação oficial: qualquer valor fora do schema invalida a saída inteira."""
-    try:
-        return de_json(saida)
-    except Exception:
-        return None
 
 
 def motivo_invalido(saida):
@@ -64,35 +57,8 @@ def motivo_invalido(saida):
     return "outra regra do schema"
 
 
-def descartando(saida):
-    """Variação posterior: descarta chaves e valores fora do schema em vez de rejeitar a saída inteira."""
-    try:
-        dados, _ = json.JSONDecoder().raw_decode(saida[saida.find("{"):])
-    except Exception:
-        return None
-    limpo = {}
-    for k, v in dados.items():
-        if k not in Pedido.model_fields or v is None:
-            continue
-        if k in ENUMS and isinstance(v, list):
-            v = [x for x in v if x in {e.value for e in ENUMS[k]}]
-        limpo[k] = v
-    if limpo.get("intent", "pedido") != "pedido":
-        limpo = {"intent": limpo["intent"]}
-    try:
-        return Pedido.model_validate(limpo)
-    except Exception:
-        return None
-
-
 def hibrido(saida_modelo, saida_regras):
-    """Variação posterior: o modelo decide a intenção; nos pedidos, as regras extraem os campos."""
-    m, r = descartando(saida_modelo), estrito(saida_regras)
-    if m is None:
-        return r
-    if m.intent != "pedido" or r.intent != "pedido":
-        return m
-    return r
+    return _hibrido(saida_modelo, estrito(saida_regras))
 
 
 def pct(x):

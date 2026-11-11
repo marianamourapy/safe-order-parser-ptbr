@@ -1,0 +1,2 @@
+tô com fome	igual a uma frase de data/train/val.jsonl
+aceita vale refeição?	parecida com t (test_main): 'aceita vale refeição? quero um PF'

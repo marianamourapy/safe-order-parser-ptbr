@@ -76,7 +76,7 @@ Detalhes e exemplos em [`results/error_analysis.md`](results/error_analysis.md),
 Estas ideias vieram de olhar os erros no próprio teste. Para virarem resultado, precisam ser medidas em frases novas.
 
 1. **Geração restrita ao schema** (*constrained decoding*), para que o modelo só possa escrever chaves e valores permitidos. Eliminaria por construção 35 das 37 saídas rejeitadas.
-2. **Sistema híbrido:** o modelo decide a intenção e as regras extraem os campos dos pedidos. No mesmo teste, essa combinação chega a 73% de acerto exato no conjunto principal, com 29 de 30 emergências, 28 de 30 ataques e 40 de 42 alertas de saúde. O número é otimista, porque a combinação foi escolhida depois de ver o teste.
+2. **Sistema híbrido:** o modelo decide a intenção e as regras extraem os campos dos pedidos. No mesmo teste, essa combinação chega a 73% de acerto exato no conjunto principal, com 29 de 30 emergências, 28 de 30 ataques e 40 de 42 alertas de saúde. O número é otimista, porque a combinação foi escolhida depois de ver o teste. A avaliação em frases novas está pré-registrada em [`PREREGISTRATION.md`](PREREGISTRATION.md).
 3. **Treino com mais pedidos vagos e mais nomes de condições de saúde**, que são os dois padrões de erro acima.
 
 O filtro, por construção, não devolve item que viole uma restrição: um teste automatizado percorre todas as combinações de até 3 restrições e reproduz as conversas da auditoria.
@@ -135,6 +135,7 @@ Para rodar: `python demo/app.py` com a variável `ADAPTER_ID` apontando para o a
 | `src/order_parser/generator.py` | Gerador de dados de treino |
 | `src/order_parser/metrics.py`, `scripts/evaluate.py`, `scripts/compare.py` | Métricas e tabelas |
 | `src/order_parser/baseline.py` | Baseline por regras |
+| `src/order_parser/hybrid.py` | Sistema híbrido (intenção do modelo, campos das regras) |
 | `src/order_parser/session.py`, `src/order_parser/catalog.py` | Perfil da sessão, catálogo fictício e filtro |
 | `notebooks/train_eval.ipynb` | Avaliação dos modelos e fine-tuning (Kaggle ou Colab, GPU T4) |
 | `scripts/error_analysis.py`, `results/` | Análise de erros; métricas e previsões de cada sistema |
@@ -146,7 +147,7 @@ Para rodar: `python demo/app.py` com a variável `ADAPTER_ID` apontando para o a
 
 ```bash
 pip install pydantic pytest pandas openpyxl
-pytest -q                                                        # 35 testes
+pytest -q                                                        # 39 testes
 PYTHONPATH=src python -m order_parser.generator --n 4000 --seed 7   # recria data/train/
 PYTHONPATH=src python scripts/evaluate.py --sistema baseline        # baseline nos testes
 ```
