@@ -113,7 +113,7 @@ Para rodar: `python demo/app.py` com a variável `ADAPTER_ID` apontando para o a
 - **Treino sintético, com rótulo por construção:** o gerador sorteia o pedido e depois escreve a frase. Um filtro remove do treino o que for parecido demais com o teste.
 - **Métricas:** acerto exato, F1 por campo, completude das restrições (extrair uma de duas conta como erro), recall de emergência e de ataque, e taxa de campos inventados. Proporções vêm com intervalo de Wilson de 95%.
 - **Comparações:** regras escritas à mão, modelo sem ajuste e modelo com exemplos no prompt. Sem a última, não daria para dizer se treinar foi necessário.
-- **Concordância de rotulagem:** _a preencher com `annotation/agreement.md` (50 frases rotuladas às cegas pela autora)._
+- **Concordância de rotulagem:** rotulei às cegas, só com o guia, 50 frases sorteadas dos quatro conjuntos. O rótulo inteiro coincidiu em 46 de 50 (92%, IC 95%: 81–97%). Nas 4 divergências, o rótulo do teste tinha um item que eu não marquei: preferências suaves ("não gosto de muita pimenta", "nem adoçada com mel"), um número de pessoas dito em tom de piada e um desejo implícito ("refeição da minha dieta" como `saudavel`). Ou seja, o guia ainda deixa margem nesses casos, e parte dos erros de "campo inventado" dos modelos cai nessa zona cinzenta. Detalhes em [`annotation/agreement.md`](annotation/agreement.md).
 
 ## Limitações
 

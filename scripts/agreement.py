@@ -1,6 +1,8 @@
 """Concordância entre a rotulagem às cegas da autora e os rótulos do conjunto de teste.
 
-Uso: PYTHONPATH=src python scripts/agreement.py annotation/blind_labeling.xlsx
+Uso: PYTHONPATH=src python scripts/agreement.py annotation/blind_labeling_filled.xlsx
+
+annotation/blind_labeling.xlsx é a planilha em branco; blind_labeling_filled.xlsx, a preenchida.
 """
 import json
 import sys
