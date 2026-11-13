@@ -22,7 +22,10 @@ linhas = [
     "  Textos e valores verificados idênticos por script. Até aqui, só o baseline por regras tinha sido",
     "  avaliado, e as métricas dele continuaram idênticas. Nenhum modelo de linguagem foi avaliado antes.",
     "- 10/11/2026: novo conjunto `test_human_restaurant.jsonl` (63 mensagens reais para um restaurante, em quatro lotes no mesmo dia),",
-    "  incluído antes da primeira avaliação de um modelo de linguagem.", "",
+    "  incluído antes da primeira avaliação de um modelo de linguagem.",
+    "- 13/11/2026: em `test_human_restaurant.jsonl`, o nome de um bairro (frase `r011`) foi trocado por `[bairro]`, para não",
+    "  expor a localização de quem escreveu. Rótulo inalterado; a saída do baseline para a frase é a mesma. Os modelos foram",
+    "  avaliados com o texto original, que difere só nesse nome.", "",
     "| Arquivo | Frases | SHA-256 |", "|---|---|---|",
 ]
 for nome in ARQUIVOS:

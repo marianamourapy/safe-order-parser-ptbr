@@ -11,6 +11,9 @@ Qualquer mudança nestes arquivos invalida a comparação com resultados anterio
   avaliado, e as métricas dele continuaram idênticas. Nenhum modelo de linguagem foi avaliado antes.
 - 10/11/2026: novo conjunto `test_human_restaurant.jsonl` (63 mensagens reais para um restaurante, em quatro lotes no mesmo dia),
   incluído antes da primeira avaliação de um modelo de linguagem.
+- 13/11/2026: em `test_human_restaurant.jsonl`, o nome de um bairro (frase `r011`) foi trocado por `[bairro]`, para não
+  expor a localização de quem escreveu. Rótulo inalterado; a saída do baseline para a frase é a mesma. Os modelos foram
+  avaliados com o texto original, que difere só nesse nome.
 
 | Arquivo | Frases | SHA-256 |
 |---|---|---|
@@ -18,4 +21,4 @@ Qualquer mudança nestes arquivos invalida a comparação com resultados anterio
 | `test_author2.jsonl` | 100 | `2a9afc64d55044de53fd9e2643f635431bd954a55f6efe36181986346e408cb3` |
 | `test_human.jsonl` | 30 | `90c9c31105f0c255862a3b4a35a2c1ba3273c6ace88e75a6f3bb81fb2d20c684` |
 | `test_human_safety.jsonl` | 10 | `9d607797105148f893e3cd86b2c3f07ea49a25b31e9ac229bf9005f7d0132668` |
-| `test_human_restaurant.jsonl` | 63 | `d8d5527da33271dd4b68dc71cb989f3c2669e8bbac6787d6ddfb0bf8ad232b58` |
+| `test_human_restaurant.jsonl` | 63 | `c702a9b1516c3310cda5f7d9895e0ea4421a521b4a92239c8201a49e3f9c07ee` |
