@@ -11,7 +11,7 @@
 
 ## O problema
 
-![Conversa com o Ailo: depois de "sou celíaca e vegetariana!", a lista de sugestões inclui pizzas de calabresa](docs/audit/ailo_celiac_vegetarian.png)
+![Conversa com o Ailo: depois de "sou celíaca e vegetariana!", a lista de sugestões inclui pizzas de calabresa](https://raw.githubusercontent.com/marianamourapy/safe-order-parser-ptbr/main/docs/audit/ailo_celiac_vegetarian.png)
 
 *Conversa com o Ailo, assistente do iFood no WhatsApp, em 07/11/2026. Nomes e bairros dos restaurantes foram ocultados.*
 
@@ -19,7 +19,7 @@ A resposta em texto registra a restrição: *"Vou considerar que você é celía
 
 Seis dias depois, numa nova conversa, o resultado foi outro. O Ailo lembrou sozinho das restrições informadas antes (vegetariana, alergia a leite e a amendoim, doença celíaca) e sugeriu apenas doces veganos, a maioria indicada como sem glúten:
 
-![Conversa com o Ailo em 13/11/2026: as três sugestões de doce são veganas](docs/audit/ailo_milk_allergy_2026-11-13.png)
+![Conversa com o Ailo em 13/11/2026: as três sugestões de doce são veganas](https://raw.githubusercontent.com/marianamourapy/safe-order-parser-ptbr/main/docs/audit/ailo_milk_allergy_2026-11-13.png)
 
 *Conversa de 13/11/2026. Nomes dos restaurantes ocultados.*
 
@@ -37,11 +37,11 @@ O comportamento, portanto, não é estável: a mesma conta, com as mesmas restri
 | **Resultado principal** | Detecção de emergências de 57% para 97% e de ataques de 50% para 90%, comparado a regras escritas à mão. Na extração de campos, o modelo empata ou perde para as regras. |
 | **Validação** | Um sistema híbrido proposto pela análise de erros foi testado em 78 frases novas, segundo um [pré-registro](PREREGISTRATION.md): 49% de acerto exato contra 38% das regras, sem significância estatística (p = 0,057). |
 
-![Recall de segurança e acerto exato de três sistemas](docs/results_overview.png)
+![Recall de segurança e acerto exato de três sistemas](https://raw.githubusercontent.com/marianamourapy/safe-order-parser-ptbr/main/docs/results_overview.png)
 
 ## Arquitetura
 
-![Arquitetura: a mensagem é interpretada pelo Qwen com LoRA, validada por um schema com intenção, guardada no perfil da sessão e aplicada por um filtro com regras fixas; emergências, ataques e mensagens fora de escopo recebem uma resposta fixa](docs/architecture.png)
+![Arquitetura: a mensagem é interpretada pelo Qwen com LoRA, validada por um schema com intenção, guardada no perfil da sessão e aplicada por um filtro com regras fixas; emergências, ataques e mensagens fora de escopo recebem uma resposta fixa](https://raw.githubusercontent.com/marianamourapy/safe-order-parser-ptbr/main/docs/architecture.png)
 
 O modelo transforma texto em campos tipados, com uma intenção entre pedido, fora de escopo, emergência e ataque:
 
@@ -104,9 +104,9 @@ Três mensagens na mesma conversa, com o modelo ajustado.
 
 | | |
 |---|---|
-| **Campo inventado.** "tenho alergia a leite" não pede comida, mas o modelo acrescentou `hamburguer`, o erro mais frequente na avaliação. O filtro devolveu apenas itens sem leite. | ![O modelo extrai a alergia a leite e acrescenta a categoria hambúrguer](docs/demo_1_invented_field.png) |
-| **Restrição mantida.** "me sugere um doce" não repete a alergia. O perfil da sessão a mantém, e nenhum doce sugerido contém leite. | ![O perfil da sessão aplica a alergia a leite da mensagem anterior](docs/demo_2_session_profile.png) |
-| **Conflito.** "sou vegano, mas me vê churrasco": o filtro não sugere nada em vez de violar a restrição. | ![Nenhuma opção atende a todos os critérios](docs/demo_3_conflict.png) |
+| **Campo inventado.** "tenho alergia a leite" não pede comida, mas o modelo acrescentou `hamburguer`, o erro mais frequente na avaliação. O filtro devolveu apenas itens sem leite. | ![O modelo extrai a alergia a leite e acrescenta a categoria hambúrguer](https://raw.githubusercontent.com/marianamourapy/safe-order-parser-ptbr/main/docs/demo_1_invented_field.png) |
+| **Restrição mantida.** "me sugere um doce" não repete a alergia. O perfil da sessão a mantém, e nenhum doce sugerido contém leite. | ![O perfil da sessão aplica a alergia a leite da mensagem anterior](https://raw.githubusercontent.com/marianamourapy/safe-order-parser-ptbr/main/docs/demo_2_session_profile.png) |
+| **Conflito.** "sou vegano, mas me vê churrasco": o filtro não sugere nada em vez de violar a restrição. | ![Nenhuma opção atende a todos os critérios](https://raw.githubusercontent.com/marianamourapy/safe-order-parser-ptbr/main/docs/demo_3_conflict.png) |
 
 Execução local: `ADAPTER_ID=namxsj/safe-order-parser-ptbr-qwen2.5-1.5b-lora python demo/app.py`. Sem a variável, a demo usa o baseline por regras.
 
