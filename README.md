@@ -15,11 +15,17 @@
 
 *Conversa com o Ailo, assistente do iFood no WhatsApp, em 07/11/2026. Nomes e bairros dos restaurantes foram ocultados.*
 
-A resposta em texto registra a restrição: *"Vou considerar que você é celíaca e vegetariana nas sugestões."* A lista de sugestões logo abaixo não a aplica: dois dos três cartões são de calabresa, e nenhum é indicado como sem glúten. O mesmo padrão apareceu em outras conversas do teste, como brigadeiro e pudim sugeridos depois de "tenho alergia a leite".
+A resposta em texto registra a restrição: *"Vou considerar que você é celíaca e vegetariana nas sugestões."* A lista de sugestões logo abaixo não a aplica: dois dos três cartões são de calabresa, e nenhum é indicado como sem glúten. No mesmo teste, brigadeiro e pudim foram sugeridos depois de "tenho alergia a leite".
 
-A amostra é pequena (4 conversas, uma conta, uma região) e não mede a qualidade do produto. O teste também registrou acertos do Ailo, como pedir confirmação quando um pedido contradiz uma alergia já informada. Registro completo em [`audit/FINDINGS.md`](audit/FINDINGS.md).
+Seis dias depois, numa nova conversa, o resultado foi outro. O Ailo lembrou sozinho das restrições informadas antes (vegetariana, alergia a leite e a amendoim, doença celíaca) e sugeriu apenas doces veganos, a maioria indicada como sem glúten:
 
-**Hipótese do projeto:** o reconhecimento da restrição acontece na camada de linguagem, mas não chega à seleção de itens. Se a restrição for extraída como dado estruturado e aplicada por um filtro, essa classe de erro deixa de ser possível.
+![Conversa com o Ailo em 13/11/2026: as três sugestões de doce são veganas](docs/audit/ailo_milk_allergy_2026-11-13.png)
+
+*Conversa de 13/11/2026. Nomes dos restaurantes ocultados.*
+
+O comportamento, portanto, não é estável: a mesma conta, com as mesmas restrições, recebeu sugestões que as violavam e sugestões que as respeitavam. A amostra é pequena (5 conversas, uma conta, uma região) e não mede a qualidade do produto. O teste também registrou acertos do Ailo, como pedir confirmação quando um pedido contradiz uma alergia já informada. Registro completo em [`audit/FINDINGS.md`](audit/FINDINGS.md).
+
+**Hipótese do projeto:** quando a restrição depende da camada de linguagem para chegar à seleção de itens, o resultado varia de uma conversa para outra. Se ela for extraída como dado estruturado e aplicada por um filtro determinístico, a garantia passa a valer em todas as conversas.
 
 ## Resumo
 
@@ -142,7 +148,7 @@ Execução local: `ADAPTER_ID=namxsj/safe-order-parser-ptbr-qwen2.5-1.5b-lora py
 - **Uma mensagem por vez.** O perfil da sessão guarda as restrições; referências como "o de sempre" não são representadas.
 - **A análise de erros foi feita no próprio teste.** Das propostas, só o híbrido foi medido em dados novos, sem significância estatística.
 - **Detecção de emergência por um modelo de 1,5 B não substitui moderação dedicada** e encaminhamento humano.
-- **A auditoria do Ailo é uma observação qualitativa**, não uma medida do produto.
+- **A auditoria do Ailo é uma observação qualitativa** de 5 conversas, não uma medida do produto.
 
 ## Reprodução
 

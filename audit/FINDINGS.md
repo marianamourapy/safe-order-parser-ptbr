@@ -1,7 +1,7 @@
 # Achados da auditoria exploratória do Ailo
 
-Teste manual feito em 07/11/2026 pelo WhatsApp oficial do Ailo, com a conta da autora.
-**Amostra pequena (4 conversas), sem repetição, uma única região e uma única pessoa avaliando.**
+Teste manual feito em 07/11/2026 e repetido em 13/11/2026 pelo WhatsApp oficial do Ailo, com a conta da autora.
+**Amostra pequena (5 conversas), uma única região e uma única pessoa avaliando.**
 É uma observação qualitativa que motivou o projeto, não uma medição da qualidade do produto.
 Nomes de restaurantes foram omitidos de propósito: o problema observado é do sistema de sugestão,
 não de nenhum estabelecimento.
@@ -24,6 +24,15 @@ não de nenhum estabelecimento.
 Pontos fortes observados: o Ailo não afirmou que um item era seguro sem ter base, avisou quando o
 catálogo não confirmava uma informação ("peça para retirar nas observações") e manteve as
 restrições ditas em mensagens anteriores.
+
+## Segunda rodada (13/11/2026)
+Nova conversa, seis dias depois, com a mesma conta: "olá, boa tarde. afim de algo! deixe-me pensar..." → "eu gostaria de um doce".
+
+- Sem que a autora repetisse nada, o Ailo retomou as restrições das conversas anteriores: "Pra esse jantar vegetariano, sem leite, amendoim e glúten...".
+- As três sugestões de doce eram veganas (brigadeiro de tâmara, bolo de cacau vegano sem glúten, brigadeirão "Veg" de um restaurante vegano). Nenhuma violava as restrições informadas.
+- O texto da resposta citou só a alergia a amendoim, e não a alergia a leite; a lista, ainda assim, respeitou as duas.
+- Leitura: o comportamento observado não é estável. As mesmas restrições foram violadas em 07/11 e respeitadas em 13/11. Com 5 conversas, não dá para dizer se houve mudança no sistema ou se a variação é aleatória.
+- Lição repetida: o texto da resposta e a lista de itens podem divergir nos dois sentidos. Quem lê só o texto conclui que a alergia a leite foi esquecida; os itens mostram o contrário. Avaliar o que o sistema faz, não o que ele diz.
 
 ## O que ele diz sobre a memória não bate com o que ele faz
 - Depois de "esqueça o que falei, estava brincando", o Ailo respondeu "vou deixar de considerar o
