@@ -1,0 +1,78 @@
+{"id": "n001", "texto": "oii tem marmita ainda?", "rotulo": {"categories": ["marmita"]}, "tag": "fresh_llm"}
+{"id": "n002", "texto": "queria uma pizza grande meia calabresa meia queijo", "rotulo": {"categories": ["pizza"]}, "tag": "fresh_llm"}
+{"id": "n003", "texto": "O hambúrguer de vocês tem leite no pão? Tenho alergia.", "rotulo": {"categories": ["hamburguer"], "exclude_ingredients": ["leite"], "health_alert": true}, "tag": "fresh_llm"}
+{"id": "n004", "texto": "manda um açaí caprichado no leite em pó pfv", "rotulo": {"categories": ["acai"]}, "tag": "fresh_llm"}
+{"id": "n005", "texto": "tem alguma coisa até 25 reais com a entrega?", "rotulo": {"max_price": 25}, "tag": "fresh_llm"}
+{"id": "n006", "texto": "boa noite vcs entregam no jardim américa", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n007", "texto": "Quero um prato vegetariano, mas sem cogumelo, por favor.", "rotulo": {"exclude_ingredients": ["cogumelo"], "restrictions": ["vegetariano"]}, "tag": "fresh_llm"}
+{"id": "n008", "texto": "me vê 2 x salada sem salada kkk", "rotulo": {"categories": ["hamburguer"], "exclude_ingredients": ["salada"]}, "tag": "fresh_llm"}
+{"id": "n009", "texto": "quanto tempo tá demorando hj?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n010", "texto": "preciso de almoço pra 4 pessoas e uma delas não come carne", "rotulo": {"partial_restrictions": ["vegetariano"], "people": 4}, "tag": "fresh_llm"}
+{"id": "n011", "texto": "tem cupom pra primeira compra?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n012", "texto": "queria sushi mas só de restaurante com nota acima de 4,5", "rotulo": {"categories": ["japonesa"], "min_rating": 4.5}, "tag": "fresh_llm"}
+{"id": "n013", "texto": "um pastel de carne e um caldo de cana sem gelo", "rotulo": {"categories": ["bebida", "salgado"], "exclude_ingredients": ["gelo"]}, "tag": "fresh_llm"}
+{"id": "n014", "texto": "sou celíaca vocês conseguem preparar sem contaminação por glúten?", "rotulo": {"restrictions": ["sem_gluten"], "health_alert": true}, "tag": "fresh_llm"}
+{"id": "n015", "texto": "qualquer coisa bem gostosa e barata", "rotulo": {"wishes": ["barato"]}, "tag": "fresh_llm"}
+{"id": "n016", "texto": "O pedido veio sem a bebida, como faço?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n017", "texto": "manda uma quentinha de frango sem feijao", "rotulo": {"categories": ["marmita"], "exclude_ingredients": ["feijao"]}, "tag": "fresh_llm"}
+{"id": "n018", "texto": "tem entrega gratis aqui pro centro?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n019", "texto": "É... oi, eu queria aquele combo de ontem, o que vinha com batata, não lembro o nome.", "rotulo": {}, "tag": "fresh_llm"}
+{"id": "n020", "texto": "quero um lanche vegano de verdade sem queijo sem maionese com ovo", "rotulo": {"categories": ["lanche"], "restrictions": ["vegano"]}, "tag": "fresh_llm"}
+{"id": "n021", "texto": "vcs tão abertos?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n022", "texto": "uma pizza brotinho só pra mim", "rotulo": {"categories": ["pizza"], "people": 1}, "tag": "fresh_llm"}
+{"id": "n023", "texto": "tenho alergia grave a amendoim, vocês usam na cozinha?", "rotulo": {"restrictions": ["sem_amendoim"], "health_alert": true}, "tag": "fresh_llm"}
+{"id": "n024", "texto": "preciso que chegue antes das 13h vcs conseguem?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n025", "texto": "to afim de um docinho", "rotulo": {"categories": ["doce"]}, "tag": "fresh_llm"}
+{"id": "n026", "texto": "qual o tamanho da porção de fritas?", "rotulo": {}, "tag": "fresh_llm"}
+{"id": "n027", "texto": "boa noite queria 3 marmitas duas com bife e uma com omelete tudo sem cebola e o feijão separado se der", "rotulo": {"categories": ["marmita"], "exclude_ingredients": ["cebola"]}, "tag": "fresh_llm"}
+{"id": "n028", "texto": "tem algo com nota pelo menos 4 e frete grátis?", "rotulo": {"free_delivery": true, "min_rating": 4}, "tag": "fresh_llm"}
+{"id": "n029", "texto": "um yakisoba sem camarão por favor", "rotulo": {"categories": ["chinesa"], "exclude_ingredients": ["camarao"]}, "tag": "fresh_llm"}
+{"id": "n030", "texto": "quero gastar no máximo 50 pra duas pessoas já contando tudo", "rotulo": {"max_price": 50, "people": 2}, "tag": "fresh_llm"}
+{"id": "n031", "texto": "o de sempre pf", "rotulo": {}, "tag": "fresh_llm"}
+{"id": "n032", "texto": "Tem sobremesa sem lactose? É intolerância, não alergia.", "rotulo": {"categories": ["doce"], "restrictions": ["sem_lactose"], "health_alert": true}, "tag": "fresh_llm"}
+{"id": "n033", "texto": "manda o molho separado pq senão chega tudo murcho", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n034", "texto": "vcs tem cardapio", "rotulo": {}, "tag": "fresh_llm"}
+{"id": "n035", "texto": "queria uma sopa bem quentinha tô meio gripada", "rotulo": {}, "tag": "fresh_llm"}
+{"id": "n036", "texto": "o frango é empanado ou grelhado?", "rotulo": {"categories": ["frango"]}, "tag": "fresh_llm"}
+{"id": "n037", "texto": "2 hamburguer e uma coca de 2l", "rotulo": {"categories": ["bebida", "hamburguer"]}, "tag": "fresh_llm"}
+{"id": "n038", "texto": "Não posso comer frutos do mar. Dá pra fazer o risoto em utensílios separados?", "rotulo": {"restrictions": ["sem_frutos_do_mar"], "health_alert": true}, "tag": "fresh_llm"}
+{"id": "n039", "texto": "alguma coisa q chegue em 20 min no máximo", "rotulo": {"max_delivery_min": 20}, "tag": "fresh_llm"}
+{"id": "n040", "texto": "me indica um almoço leve mas q sustente", "rotulo": {"wishes": ["farto", "leve"]}, "tag": "fresh_llm"}
+{"id": "n041", "texto": "essa promoção ainda tá valendo?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n042", "texto": "quero uma feijoada individual sem torresmo", "rotulo": {"categories": ["brasileira"], "exclude_ingredients": ["torresmo"], "people": 1}, "tag": "fresh_llm"}
+{"id": "n043", "texto": "somos 8 aqui tem algum combo que compense?", "rotulo": {"people": 8, "wishes": ["barato"]}, "tag": "fresh_llm"}
+{"id": "n044", "texto": "tira o coentro de tudo pelo amor de deus", "rotulo": {"exclude_ingredients": ["coentro"]}, "tag": "fresh_llm"}
+{"id": "n045", "texto": "Queria pedir um bolo pequeno sem leite e sem ovo. Vocês fazem?", "rotulo": {"categories": ["doce"], "exclude_ingredients": ["leite", "ovo"]}, "tag": "fresh_llm"}
+{"id": "n046", "texto": "só uma água com gás mesmo", "rotulo": {"categories": ["bebida"]}, "tag": "fresh_llm"}
+{"id": "n047", "texto": "tem como retirar aí em vez de entregar?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n048", "texto": "um pratão de pedreiro até trintão tem?", "rotulo": {"max_price": 30, "wishes": ["farto"]}, "tag": "fresh_llm"}
+{"id": "n049", "texto": "moço eu falei sem pimenta 😭", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n050", "texto": "Quero uma pizza sem glúten, mas não tenho alergia, é só preferência.", "rotulo": {"categories": ["pizza"], "restrictions": ["sem_gluten"]}, "tag": "fresh_llm"}
+{"id": "n051", "texto": "manda 6 esfirras de carne e 6 de queijo", "rotulo": {"categories": ["arabe"]}, "tag": "fresh_llm"}
+{"id": "n052", "texto": "Vocês estão contratando entregador?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n053", "texto": "quero comida japonesa de um lugar com nota mínima 4,8 e bastante avaliação", "rotulo": {"categories": ["japonesa"], "min_rating": 4.8}, "tag": "fresh_llm"}
+{"id": "n054", "texto": "pode ser um sanduíche qualquer só não coloca atum", "rotulo": {"categories": ["lanche"], "exclude_ingredients": ["atum"]}, "tag": "fresh_llm"}
+{"id": "n055", "texto": "É... pera aí, amor, você quer qual? Tá, são dois de frango, moça, um sem milho.", "rotulo": {"categories": ["frango"], "exclude_ingredients": ["milho"]}, "tag": "fresh_llm"}
+{"id": "n056", "texto": "preciso de um jantar vegano pra 3 pessoas até 100 reais", "rotulo": {"restrictions": ["vegano"], "max_price": 100, "people": 3}, "tag": "fresh_llm"}
+{"id": "n057", "texto": "o motoboy consegue trazer troco pra 100?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n058", "texto": "tem café da manhã agora ou só amanhã?", "rotulo": {"categories": ["cafe_padaria"]}, "tag": "fresh_llm"}
+{"id": "n059", "texto": "quero um escondidinho bem recheado", "rotulo": {"categories": ["brasileira"], "wishes": ["farto"]}, "tag": "fresh_llm"}
+{"id": "n060", "texto": "nao como porco tem alguma opção de lanche?", "rotulo": {"categories": ["lanche"], "exclude_ingredients": ["porco"]}, "tag": "fresh_llm"}
+{"id": "n061", "texto": "a entrega tá dando 18 conto 😭 não tem opção grátis?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n062", "texto": "Vocês têm cadeirão para bebê no salão?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n063", "texto": "uma marmita pequena arroz feijão bife e salada sem tomate", "rotulo": {"categories": ["marmita"], "exclude_ingredients": ["tomate"]}, "tag": "fresh_llm"}
+{"id": "n064", "texto": "queria pedir pra minha mãe mas entregar em outro endereço pode?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n065", "texto": "tenho 15 reais oq dá pra pedir", "rotulo": {"max_price": 15}, "tag": "fresh_llm"}
+{"id": "n066", "texto": "o molho pesto leva castanha? sou alérgico", "rotulo": {"exclude_ingredients": ["castanha"], "health_alert": true}, "tag": "fresh_llm"}
+{"id": "n067", "texto": "manda uma coca zero e uma batata grande bem sequinha", "rotulo": {"categories": ["bebida"]}, "tag": "fresh_llm"}
+{"id": "n068", "texto": "quero um restaurante com nota boa tipo de 4 pra cima", "rotulo": {"min_rating": 4}, "tag": "fresh_llm"}
+{"id": "n069", "texto": "Oi, então, eu preciso de comida pra seis adultos e duas crianças, nada apimentado, e queria saber o valor antes de fechar.", "rotulo": {"exclude_ingredients": ["pimenta"], "people": 8}, "tag": "fresh_llm"}
+{"id": "n070", "texto": "tem pão de queijo sem lactose?", "rotulo": {"categories": ["cafe_padaria"], "restrictions": ["sem_lactose"]}, "tag": "fresh_llm"}
+{"id": "n071", "texto": "me surpreende só não manda nada doce", "rotulo": {"exclude_categories": ["doce"], "wishes": ["diferente"]}, "tag": "fresh_llm"}
+{"id": "n072", "texto": "dá pra agendar a entrega pra 19h30?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n073", "texto": "queria um hamburgue sem picles e sem mostarda", "rotulo": {"categories": ["hamburguer"], "exclude_ingredients": ["mostarda", "picles"]}, "tag": "fresh_llm"}
+{"id": "n074", "texto": "o almoço de ontem tava bom demais parabéns pra cozinha", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n075", "texto": "uma salada sem queijo e com o molho à parte, por favor", "rotulo": {"categories": ["salada"], "exclude_ingredients": ["queijo"]}, "tag": "fresh_llm"}
+{"id": "n076", "texto": "to varado de fome manda o que sair mais rapido", "rotulo": {"wishes": ["rapido"]}, "tag": "fresh_llm"}
+{"id": "n077", "texto": "o combo de 39,90 serve dois mesmo ou é dois que comem pouco?", "rotulo": {"intent": "fora_escopo"}, "tag": "fresh_llm"}
+{"id": "n078", "texto": "fecha uma pizza família de frango com catupiry e uma guaraná se passar de 80 com a entrega me avisa antes", "rotulo": {"categories": ["bebida", "pizza"], "max_price": 80}, "tag": "fresh_llm"}
