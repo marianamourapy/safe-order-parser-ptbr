@@ -71,12 +71,26 @@ Detalhes e exemplos em [`results/error_analysis.md`](results/error_analysis.md),
 - **O alerta de saúde falha quando a pessoa cita a condição pelo nome.** "Sou diabético" e "sou celíaco" geraram a restrição certa, mas sem o alerta ou com um valor inventado que invalidou a saída. É a perda mais séria: 34 de 42 alertas, contra 41 das regras.
 - **Falsos alarmes de intenção:** 18 pedidos comuns foram classificados como fora de escopo (11) ou ataque (7), incluindo uma mensagem sobre alergia grave a amendoim. O ganho em emergências e ataques tem esse custo.
 
+### Validação do híbrido em frases novas (pré-registrada)
+
+O híbrido foi desenhado olhando o próprio teste, então o testei em frases que não influenciaram nenhuma decisão. Antes de rotular e de rodar qualquer sistema, registrei a hipótese, a métrica e o código em [`PREREGISTRATION.md`](PREREGISTRATION.md). As frases são 78 mensagens escritas por outro LLM, rotuladas por mim e congeladas com hash ([decisões de rotulagem](annotation/fresh_labeling_decisions.md)).
+
+| Sistema | Acerto exato [IC 95%] | Micro-F1 dos campos | Fora de escopo detectado | Alerta de saúde |
+|---|---|---|---|---|
+| Regras | 38% [28–50] | 78% | 0/19 | 5/6 |
+| Qwen + LoRA | 37% [27–48] | 66% | 11/19 | 4/6 |
+| **Híbrido** | **49% [38–60]** | 77% | 11/19 | 5/6 |
+
+**Resultado: a direção se confirmou, mas a diferença não é conclusiva.** O híbrido foi o melhor nas 78 frases, e os intervalos ainda se sobrepõem, como o pré-registro previa para diferenças desse tamanho. Um teste pareado, feito depois e fora do pré-registro, aponta o mesmo: contra as regras, o híbrido acertou 11 frases que elas erraram e errou 3 que elas acertaram (McNemar exato, p = 0,057); contra o modelo sozinho, 15 a 6 (p = 0,078).
+
+O ganho vem todo da intenção. As regras não reconhecem nenhuma mensagem fora de escopo, e o modelo reconhece 11 de 19. As 3 frases que o híbrido perdeu para as regras são perguntas sobre comida que o modelo tratou como fora de escopo ("vcs tem cardapio", "tem café da manhã agora?"). Tabela completa em [`results/fresh_eval.md`](results/fresh_eval.md).
+
 ### Próximos passos que os erros apontam
 
 Estas ideias vieram de olhar os erros no próprio teste. Para virarem resultado, precisam ser medidas em frases novas.
 
 1. **Geração restrita ao schema** (*constrained decoding*), para que o modelo só possa escrever chaves e valores permitidos. Eliminaria por construção 35 das 37 saídas rejeitadas.
-2. **Sistema híbrido:** o modelo decide a intenção e as regras extraem os campos dos pedidos. No mesmo teste, essa combinação chega a 73% de acerto exato no conjunto principal, com 29 de 30 emergências, 28 de 30 ataques e 40 de 42 alertas de saúde. O número é otimista, porque a combinação foi escolhida depois de ver o teste. A avaliação em frases novas está pré-registrada em [`PREREGISTRATION.md`](PREREGISTRATION.md).
+2. **Sistema híbrido:** o modelo decide a intenção e as regras extraem os campos dos pedidos. No mesmo teste, essa combinação chega a 73% de acerto exato no conjunto principal, com 29 de 30 emergências, 28 de 30 ataques e 40 de 42 alertas de saúde. O número é otimista, porque a combinação foi escolhida depois de ver o teste. Em frases novas, o híbrido chegou a 49% contra 38% das regras, sem significância estatística (seção acima).
 3. **Treino com mais pedidos vagos e mais nomes de condições de saúde**, que são os dois padrões de erro acima.
 
 O filtro, por construção, não devolve item que viole uma restrição: um teste automatizado percorre todas as combinações de até 3 restrições e reproduz as conversas da auditoria.
@@ -123,7 +137,7 @@ Para rodar: `python demo/app.py` com a variável `ADAPTER_ID` apontando para o a
 - **As mensagens reais foram escritas para um restaurante, não para um assistente.** Muitas são perguntas sobre cardápio e preço, que o schema representa mal.
 - **O filtro pressupõe um catálogo com ingredientes e marcações confiáveis.** Em cardápios reais isso costuma faltar, e inferir esses atributos é outro problema.
 - **Uma mensagem por vez.** O modelo não lê o histórico; quem lembra das restrições é o perfil da sessão. Pedidos como "o de sempre" ou "troca a bebida" não são representados.
-- **A análise de erros foi feita no próprio teste.** As propostas de melhoria não foram validadas em dados novos.
+- **A análise de erros foi feita no próprio teste.** Das propostas de melhoria, só o híbrido foi medido em dados novos, e com 78 frases a diferença não é conclusiva.
 - **Detecção de emergência por um modelo de 1,5 B não é solução de segurança.** Um sistema real precisa de moderação dedicada e encaminhamento humano.
 - **A auditoria do Ailo é uma observação pequena**, não uma medida da qualidade do produto.
 
@@ -147,7 +161,7 @@ Para rodar: `python demo/app.py` com a variável `ADAPTER_ID` apontando para o a
 
 ```bash
 pip install pydantic pytest pandas openpyxl
-pytest -q                                                        # 39 testes
+pytest -q                                                        # 41 testes
 PYTHONPATH=src python -m order_parser.generator --n 4000 --seed 7   # recria data/train/
 PYTHONPATH=src python scripts/evaluate.py --sistema baseline        # baseline nos testes
 ```

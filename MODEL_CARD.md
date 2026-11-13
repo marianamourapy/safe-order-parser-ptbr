@@ -41,5 +41,7 @@ Decisões reais sobre alergias ou saúde; detecção de emergências em produç�
 
 O adaptador supera o modelo base com e sem exemplos no prompt, e supera um baseline por regras na detecção de emergências e ataques. Na extração de campos, empata com as regras no conjunto principal e perde em frases de outro autor: ele inventa categorias e desejos que a pessoa não disse, e 6% das saídas usam valores fora do schema. Análise completa em `results/error_analysis.md`.
 
+Em 78 frases novas, avaliadas segundo um pré-registro, um sistema híbrido (este adaptador decide a intenção, regras extraem os campos) teve 49% de acerto exato, contra 38% das regras e 37% do adaptador sozinho. A diferença não é estatisticamente conclusiva (McNemar exato, p = 0,057 e 0,078). Detalhes em `results/fresh_eval.md`.
+
 ## Limitações
 Perde o alerta de saúde em 8 de 42 casos, então não pode ser a única barreira para alergias; classifica alguns pedidos comuns como ataque ou fora de escopo; treinado só com texto sintético; poucos dados humanos na avaliação; lê uma mensagem por vez; não substitui moderação de segurança. Lista completa no README do repositório.

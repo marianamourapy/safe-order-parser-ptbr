@@ -6,6 +6,7 @@ O arquivo de previsões vem da célula 8 do notebook. Gera results/fresh_eval.md
 """
 import hashlib
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -16,6 +17,19 @@ from order_parser.metrics import avaliar
 from order_parser.schema import Pedido
 
 RAIZ = Path(__file__).resolve().parents[1]
+
+
+def mcnemar_exato(a_certo, b_certo):
+    """Teste pareado: só contam as frases em que um sistema acertou e o outro errou.
+
+    Sob a hipótese de que os dois são iguais, cada discordância é cara ou coroa.
+    Devolve (só A acertou, só B acertou, valor-p bilateral exato).
+    """
+    so_a = sum(a and not b for a, b in zip(a_certo, b_certo))
+    so_b = sum(b and not a for a, b in zip(a_certo, b_certo))
+    n, k = so_a + so_b, min(so_a, so_b)
+    p = min(1.0, 2 * sum(math.comb(n, i) for i in range(k + 1)) / 2 ** n) if n else 1.0
+    return so_a, so_b, p
 
 
 def pct(x):
@@ -58,6 +72,16 @@ def main(arq_preds):
     linha("Restrições completas", lambda r: f"{pct(r['restricoes_completas'])} (n={r['restricoes_completas_n']})")
     linha("Alerta de saúde (recall)", lambda r: f"{pct(r['alerta_saude_recall'])} (n={r['alerta_saude_n']})")
     linha("Inventou campos em pedido vazio", lambda r: f"{pct(r['inventou_em_vazios'])} (n={r['vazios_n']})")
+
+    acertos = {nome: [o == (p or Pedido()) for o, p in zip(ouros, prevs)] for nome, prevs in sistemas.items()}
+    h = acertos["Híbrido (pré-registrado)"]
+    out += ["", "## Análise adicional (não pré-registrada): teste pareado de McNemar", "",
+            "Os sistemas responderam às mesmas frases, então dá para comparar só as frases em que um acertou "
+            "e o outro errou. Valor-p exato, bilateral.", "",
+            "| Comparação | Só o híbrido acertou | Só o outro acertou | Valor-p |", "|---|---|---|---|"]
+    for outro in ["Regras (baseline)", "Qwen + LoRA (leitura oficial)"]:
+        a, b, p = mcnemar_exato(h, acertos[outro])
+        out.append(f"| Híbrido x {outro} | {a} | {b} | {p:.3f} |")
 
     (RAIZ / "results" / "fresh_eval.md").write_text("\n".join(out) + "\n", encoding="utf8")
     print("\n".join(out))
