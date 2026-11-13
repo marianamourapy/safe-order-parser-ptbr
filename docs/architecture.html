@@ -1,0 +1,95 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+:root { --hot:#e5392b; --wash:#fdecea; --go:#13955f; --gowash:#e3f5ec; --ink:#1d1b20; --soft:#5f5a66; --hair:#e4e1e8; --app:#f3f2f4; }
+* { box-sizing: border-box; margin: 0; }
+body { width: 1400px; background: #fff; font-family: Inter, sans-serif; color: var(--ink); }
+.frame { position: relative; width: 1400px; height: 676px; background: var(--app); border-radius: 28px; overflow: hidden; }
+.band { position: absolute; inset: 0 0 auto 0; height: 128px; background: var(--hot); color: #fff; padding: 30px 44px; display: flex; justify-content: space-between; align-items: flex-start; }
+.band h1 { font: 700 34px/1.1 Poppins, sans-serif; }
+.band p { font-size: 16px; opacity: .92; margin-top: 6px; }
+.badge { background: #fff; color: var(--hot); font: 700 14px Poppins; padding: 7px 16px; border-radius: 99px; margin-top: 4px; }
+svg.route { position: absolute; inset: 0; }
+.card { position: absolute; width: 230px; background: #fff; border-radius: 20px; padding: 18px 18px 16px; box-shadow: 0 12px 28px -18px rgba(40,10,10,.45); display: grid; gap: 8px; }
+.step { font: 700 12px Poppins; letter-spacing: .06em; text-transform: uppercase; color: var(--hot); }
+.card h2 { font: 700 19px/1.2 Poppins, sans-serif; }
+.card p { font-size: 13.5px; line-height: 1.45; color: var(--soft); }
+.bubble { background: #dcf3e5; color: var(--ink); font-size: 14px; padding: 8px 12px; border-radius: 14px 14px 14px 4px; width: fit-content; }
+.json { font: 12px/1.5 "DejaVu Sans Mono", monospace; background: var(--app); border-radius: 10px; padding: 8px 10px; color: var(--ink); }
+.json b { color: var(--hot); font-weight: 600; }
+.pill { display: inline-block; font: 600 12px Poppins; padding: 4px 10px; border-radius: 99px; background: var(--wash); color: var(--hot); margin: 2px 4px 0 0; }
+.card.done { background: var(--go); color: #fff; }
+.card.done .step, .card.done p { color: #fff; opacity: .95; }
+.card.alert { background: #fff; border: 2px dashed var(--hot); box-shadow: none; }
+.row { display: flex; justify-content: space-between; font-size: 13px; }
+.row.cut { color: #b4adb7; text-decoration: line-through; }
+.row.ok { color: #fff; font-weight: 600; }
+.foot { position: absolute; left: 44px; bottom: 26px; font-size: 13px; color: var(--soft); }
+</style></head>
+<body>
+<div class="frame">
+  <div class="band">
+    <div><h1>Do desejo ao pedido</h1><p>Quem interpreta não é quem decide: o modelo lê a mensagem, regras fixas escolhem os itens.</p></div>
+    <span class="badge">Arquitetura</span>
+  </div>
+
+  <svg class="route" width="1400" height="676" viewBox="0 0 1400 676" fill="none">
+    <path d="M150 196 C 260 196, 300 196, 410 196 S 560 196, 670 196 S 820 196, 930 196 S 1080 196, 1190 196"
+          stroke="#e5392b" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 14"/>
+    <path d="M670 450 L 670 478" stroke="#e5392b" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 14"/>
+    <g fill="#fff" stroke="#e5392b" stroke-width="5">
+      <circle cx="150" cy="196" r="10"/><circle cx="410" cy="196" r="10"/><circle cx="670" cy="196" r="10"/><circle cx="930" cy="196" r="10"/>
+    </g>
+    <circle cx="1190" cy="196" r="10" fill="#fff" stroke="#13955f" stroke-width="5"/>
+    <g transform="translate(1214 164)" stroke="#e5392b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="8" cy="22" r="5" fill="#fff"/><circle cx="26" cy="22" r="5" fill="#fff"/><path d="M8 22h8l4-9h6l2 9"/><path d="M13 13h7"/><rect x="2" y="7" width="9" height="8" rx="2" fill="#fff"/>
+    </g>
+    
+  </svg>
+
+  <div class="card" style="left:36px; top:228px">
+    <span class="step">1 · Mensagem</span>
+    <div class="bubble">sou celíaca e vegetariana</div>
+    <div class="bubble">me vê uma pizza</div>
+    <p>Português informal, com gíria, erro de digitação e restrições ditas em mensagens diferentes.</p>
+  </div>
+
+  <div class="card" style="left:296px; top:228px">
+    <span class="step">2 · Interpreta</span>
+    <h2>Qwen2.5-1.5B + LoRA</h2>
+    <p>Transforma texto em campos. Nunca escolhe pratos.</p>
+    <div class="json">{"categories":[<b>"pizza"</b>],<br>&nbsp;"restrictions":[<b>"sem_gluten"</b>,<br>&nbsp;&nbsp;<b>"vegetariano"</b>],<br>&nbsp;"health_alert":<b>true</b>}</div>
+  </div>
+
+  <div class="card" style="left:556px; top:228px">
+    <span class="step">3 · Valida</span>
+    <h2>Schema + intenção</h2>
+    <p>pydantic com enums fechados; valor fora da lista invalida a saída.</p>
+    <div><span class="pill">pedido</span><span class="pill">fora de escopo</span><span class="pill">emergência</span><span class="pill">ataque</span></div>
+  </div>
+
+  <div class="card alert" style="left:556px; top:486px; width:230px">
+    <span class="step">Desvio</span>
+    <h2>Resposta fixa</h2>
+    <p>Emergência, ataque ou fora de escopo nunca chegam ao catálogo.</p>
+  </div>
+
+  <div class="card" style="left:816px; top:228px">
+    <span class="step">4 · Lembra</span>
+    <h2>Perfil da sessão</h2>
+    <p>Acumula as restrições da conversa. Alergia a leite exclui qualquer item com lactose.</p>
+  </div>
+
+  <div class="card done" style="left:1076px; top:228px; width:288px">
+    <span class="step">5 · Decide e entrega</span>
+    <h2>Filtro com regras fixas</h2>
+    <div class="row cut"><span>Pizza calabresa</span><span>glúten, carne</span></div>
+    <div class="row cut"><span>Pizza marguerita</span><span>glúten</span></div>
+    <div class="row ok"><span>Marguerita sem glúten</span><span>✓</span></div>
+    <div class="row ok"><span>Vegana sem glúten</span><span>✓</span></div>
+    <p>2 de 6 pizzas passam. Item que viola restrição não aparece.</p>
+  </div>
+
+  <div class="foot">safe-order-parser-ptbr · catálogo e restaurantes fictícios</div>
+</div>
+</body></html>

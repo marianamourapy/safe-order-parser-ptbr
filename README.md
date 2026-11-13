@@ -41,17 +41,7 @@ O comportamento, portanto, não é estável: a mesma conta, com as mesmas restri
 
 ## Arquitetura
 
-```mermaid
-flowchart LR
-    M["Mensagem<br/><i>sou celíaca, me vê uma pizza</i>"] --> L["Qwen2.5-1.5B + LoRA<br/>só interpreta"]
-    L --> J["Pedido em JSON<br/>validado por schema"]
-    J --> I{Intenção}
-    I -- "emergência / ataque /<br/>fora de escopo" --> R["Resposta fixa<br/>sem chamar o catálogo"]
-    I -- pedido --> S["Perfil da sessão<br/>acumula restrições"]
-    S --> F["Filtro com regras fixas"]
-    C[("Catálogo<br/>fictício")] --> F
-    F --> O["Só itens que respeitam<br/>todas as restrições"]
-```
+![Arquitetura: a mensagem é interpretada pelo Qwen com LoRA, validada por um schema com intenção, guardada no perfil da sessão e aplicada por um filtro com regras fixas; emergências, ataques e mensagens fora de escopo recebem uma resposta fixa](docs/architecture.png)
 
 O modelo transforma texto em campos tipados, com uma intenção entre pedido, fora de escopo, emergência e ataque:
 
